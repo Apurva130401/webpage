@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SyncFlo Ai - Book a Demo</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0B0F19',
+                        secondary: '#141A28',
+                        accent: '#00F0FF',
+                        accent2: '#7000FF',
+                        muted: '#8A8F98',
+                        green_accent: '#00FF87',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: #0B0F19;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #00F0FF, #7000FF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .hero-pattern {
+            background-image: radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.1) 0%, transparent 30%),
+                             radial-gradient(circle at 0% 100%, rgba(112, 0, 255, 0.1) 0%, transparent 40%),
+                             radial-gradient(circle at 100% 100%, rgba(0, 240, 255, 0.1) 0%, transparent 40%);
+        }
+        .step-card {
+            border: 1px solid #1f2937;
+            background: linear-gradient(145deg, #141A28, #0B0F19);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        .step-number {
+            background: linear-gradient(90deg, #00F0FF, #7000FF);
+            color: #0B0F19;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Navigation Bar -->
+    <nav class="fixed w-full z-50 bg-primary/80 backdrop-blur-lg border-b border-white/10">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center">
+                    <div class="text-3xl font-bold font-display">
+                        <span class="gradient-text">SyncFlo</span><span class="text-white">Ai</span>
+                    </div>
+                </a>
+                <div class="hidden md:flex space-x-8 items-center">
+                    
+                    <a href="waitlist.html" class="nav-link text-white/80 hover:text-accent transition-colors">Waitlist</a>
+                    <a href="contact.html" class="bg-gradient-to-r from-accent to-accent2 text-primary font-semibold px-6 py-2 rounded-full hover:opacity-90 transition-opacity">Contact Us</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-secondary border-t border-white/10">
+            <div class="container mx-auto px-6 py-4 space-y-4">
+                
+                <a href="waitlist.html" class="block text-white/80 hover:text-accent transition-colors">Waitlist</a>
+                <a href="contact.html" class="block bg-gradient-to-r from-accent to-accent2 text-primary font-semibold px-6 py-2 rounded-full text-center hover:opacity-90 transition-opacity">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24">
+        <!-- Hero Section -->
+        <section class="hero-pattern text-center py-16 sm:py-20 md:py-28">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold font-display leading-tight mb-6" data-aos="fade-down">
+                    Your Automation Journey <span class="gradient-text">Starts Here</span>
+                </h1>
+                <p class="text-lg sm:text-xl text-white/80 mb-8 max-w-3xl mx-auto" data-aos="fade-down" data-aos-delay="100">
+                    Discover how SyncFlo Ai can save you time and money. Book a free, no-obligation demo with our team in three simple steps.
+                </p>
+            </div>
+        </section>
+
+        <!-- Steps Section -->
+        <section class="py-16 sm:py-20 bg-secondary">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-3 gap-6 md:gap-8 text-center">
+                    <!-- Step 1 -->
+                    <div class="step-card p-6 sm:p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="100">
+                        <div class="step-number w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold font-display mx-auto mb-6">1</div>
+                        <h3 class="text-xl sm:text-2xl font-bold font-display mb-3">Pick a Time</h3>
+                        <p class="text-white/70">Choose a time slot from the calendar below that works best for you.</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="step-card p-6 sm:p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="200">
+                        <div class="step-number w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold font-display mx-auto mb-6">2</div>
+                        <h3 class="text-xl sm:text-2xl font-bold font-display mb-3">Join the Call</h3>
+                        <p class="text-white/70">We'll send you a meeting link for a personalized 1-on-1 demo.</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="step-card p-6 sm:p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="300">
+                        <div class="step-number w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold font-display mx-auto mb-6">3</div>
+                        <h3 class="text-xl sm:text-2xl font-bold font-display mb-3">Automate & Grow</h3>
+                        <p class="text-white/70">Discover your custom automation strategy and start scaling your business.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calendly Embed Section -->
+        <section id="schedule" class="py-16 sm:py-20">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto bg-primary rounded-2xl overflow-hidden border border-white/10" data-aos="zoom-in-up">
+                    <!-- Calendly inline widget begin -->
+                    <div class="calendly-inline-widget" data-url="https://calendly.com/syncfloai/30min" style="min-width:320px;height:700px;"></div>
+                    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                    <!-- Calendly inline widget end -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-primary border-t border-white/10">
+        <div class="container mx-auto px-6 text-center text-white/70">
+            <p>&copy; 2024 SyncFlo Ai. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

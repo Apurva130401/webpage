@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You! - SyncFlo Ai</title>
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0B0F19',
+                        secondary: '#141A28',
+                        accent: '#00F0FF',
+                        accent2: '#7000FF',
+                        muted: '#8A8F98'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0B0F19;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #00F0FF, #7000FF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1 class="text-5xl md:text-6xl font-bold font-display mb-4">
+            <span class="gradient-text">Thank You!</span>
+        </h1>
+        <p class="text-lg text-white/70 max-w-md mx-auto">
+            Your message has been sent successfully. We will review it and get back to you as soon as possible.
+        </p>
+        <div class="mt-8">
+            <a href="/" class="bg-gradient-to-r from-accent to-accent2 text-primary font-semibold px-8 py-3 rounded-full hover:opacity-90 transition-opacity">
+                &larr; Go Back Home
+            </a>
+        </div>
+    </main>
+</body>
+</html>

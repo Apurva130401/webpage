@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Business AI Plans - SyncFlo Ai</title>
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0B0F19', secondary: '#141A28', accent: '#00F0FF', accent2: '#7000FF',
+                        green_accent: '#00FF87', blue_accent: '#00A3FF', muted: '#8A8F98'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { background-color: #0B0F19; color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .gradient-text { background: linear-gradient(90deg, #00FF87, #00A3FF); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .hero-pattern { background-image: radial-gradient(circle at 10% 20%, rgba(0, 255, 135, 0.07) 0%, transparent 25%), radial-gradient(circle at 80% 90%, rgba(0, 163, 255, 0.07) 0%, transparent 25%); }
+        .pricing-card.popular { border-color: var(--tw-clr-green_accent); transform: scale(1.02); box-shadow: 0 0 30px rgba(0, 255, 135, 0.1); }
+        .faq-item.open .faq-answer { max-height: 500px; padding-top: 1rem; }
+        .faq-item .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out; }
+        .faq-item.open .faq-arrow { transform: rotate(180deg); }
+        .faq-arrow { transition: transform 0.3s ease-in-out; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-primary/80 backdrop-blur-lg border-b border-white/10">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center"><div class="text-3xl font-bold font-display"><span class="gradient-text">SyncFlo</span><span class="text-white">Ai</span></div></a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#pricing" class="nav-link text-white/80 hover:text-green_accent transition-colors">Pricing</a>
+                <a href="#comparison" class="nav-link text-white/80 hover:text-green_accent transition-colors">Compare Plans</a>
+                <a href="#faq" class="nav-link text-white/80 hover:text-green_accent transition-colors">FAQ</a>
+                <a href="contact.html" class="bg-gradient-to-r from-green_accent to-blue_accent text-primary font-semibold px-6 py-2 rounded-full hover:opacity-90 transition-opacity">Request a Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Starts Here -->
+    <main>
+        <!-- Hero Section -->
+        <section id="product-hero" class="hero-pattern pt-40 pb-20">
+            <div class="container mx-auto px-6 text-center" data-aos="fade-down">
+                <div class="inline-block bg-green_accent/10 text-green_accent px-4 py-2 rounded-full text-sm font-semibold mb-4">WhatsApp Business AI</div>
+                <h1 class="text-4xl md:text-6xl font-bold font-display leading-tight mb-6">The Right Plan for Your Business</h1>
+                <p class="text-xl text-white/80 mb-8 max-w-3xl mx-auto">From startups to enterprises, find the perfect plan to revolutionize your customer communication on WhatsApp. No hidden fees. Change plans anytime.</p>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="flex justify-center items-center space-x-4 mb-12" data-aos="fade-up">
+                    <span class="font-semibold text-lg text-white/80">Monthly</span>
+                    <label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" id="price-toggle" class="sr-only peer"><div class="w-14 h-8 bg-secondary peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-green_accent"></div></label>
+                    <span class="font-semibold text-lg text-white/80">Annually <span class="text-xs text-green_accent">(Save up to 20%)</span></span>
+                </div>
+
+                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                    <!-- Plan 1: Starter -->
+                    <div class="pricing-card bg-secondary p-8 rounded-xl border border-white/10" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="text-2xl font-bold font-display mb-2">Starter</h3><p class="text-white/70 mb-6">For new businesses getting started with automation.</p>
+                        <div class="text-4xl font-bold font-display mb-6">$<span class="price" data-monthly="99" data-annual="79">99</span><span class="text-lg font-normal text-white/70 price-period">/mo</span></div>
+                        <p class="text-sm text-muted mb-6">Perfect for basic support automation and lead capture.</p>
+                        <a href="payment.html?plan=starter" class="w-full text-center block bg-white/10 border border-white/20 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/20">Choose Starter</a>
+                        <ul class="space-y-4 text-white/80 mt-8 text-sm"><li class="flex"><svg class="w-5 h-5 text-green_accent mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>1,000 Conversations/mo</span></li><li class="flex"><svg class="w-5 h-5 text-green_accent mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>1 WhatsApp Number</span></li><li class="flex"><svg class="w-5 h-5 text-green_accent mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>FAQ & Support Automation</span></li></ul>
+                    </div>
+                    <!-- Plan 2: Business (Popular) -->
+                    <div class="pricing-card popular bg-secondary p-8 rounded-xl border-2 transition-all duration-300 relative" data-aos="fade-up" data-aos-delay="200">
+                         <div class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2"><div class="bg-gradient-to-r from-green_accent to-blue_accent text-primary font-semibold px-4 py-1 rounded-full text-sm">Most Popular</div></div>
+                        <h3 class="text-3xl font-bold font-display mb-2">Business</h3><p class="text-white/70 mb-6">For growing businesses scaling sales and support.</p>
+                        <div class="text-5xl font-bold font-display mb-6">$<span class="price" data-monthly="249" data-annual="199">249</span><span class="text-lg font-normal text-white/70 price-period">/mo</span></div>
+                        <p class="text-sm text-muted mb-6">Includes advanced sales tools and integrations.</p>
+                        <a href="payment.html?plan=business" class="w-full text-center block bg-gradient-to-r from-green_accent to-blue_accent text-primary font-semibold px-6 py-4 rounded-full hover:opacity-90">Choose Business</a>
+                        <ul class="space-y-4 text-white/80 mt-8 text-sm"><li class="flex"><svg class="w-5 h-5 text-green_accent mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>5,000 Conversations/mo</span></li><li class="flex"><svg class="w-5 h-5 text-green_accent mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Up to 3 WhatsApp Numbers</span></li><li class="flex"><svg class="w-5 h-5 text-green_accent mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Lead Qualification & Sales Automation</span></li><li class="flex"><svg class="w-5 h-5 text-green_accent mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>CRM & Premium Integrations</span></li></ul>
+                    </div>
+                    <!-- Plan 3: Enterprise -->
+                     <div class="pricing-card bg-secondary p-8 rounded-xl border border-white/10" data-aos="fade-up" data-aos-delay="300">
+                        <h3 class="text-2xl font-bold font-display mb-2">Enterprise</h3><p class="text-white/70 mb-6">For large organizations with custom needs.</p>
+                        <p class="text-4xl font-bold font-display mb-6">Let's Talk</p>
+                        <p class="text-sm text-muted mb-6">Custom volume, security, and support.</p>
+                        <a href="contact.html" class="w-full text-center block bg-white/10 border border-white/20 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/20">Contact Sales</a>
+                        <ul class="space-y-4 text-white/80 mt-8 text-sm"><li class="flex"><svg class="w-5 h-5 text-green_accent mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Custom Conversation Volume</span></li><li class="flex"><svg class="w-5 h-5 text-green_accent mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>API Access & Webhooks</span></li><li class="flex"><svg class="w-5 h-5 text-green_accent mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Dedicated Onboarding & Manager</span></li></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Feature Comparison Table -->
+        <section id="comparison" class="py-20 bg-primary">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold font-display text-center mb-12" data-aos="fade-up">Full Plan Comparison</h2>
+                <div class="bg-secondary rounded-xl border border-white/10 overflow-x-auto" data-aos="fade-up">
+                    <table class="w-full text-left min-w-[800px]">
+                        <thead>
+                            <tr class="border-b border-white/10">
+                                <th class="p-6 w-1/3 font-semibold text-lg">Features</th>
+                                <th class="p-6 text-center font-semibold text-lg">Starter</th>
+                                <th class="p-6 text-center font-semibold text-lg">Business</th>
+                                <th class="p-6 text-center font-semibold text-lg">Enterprise</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/10 text-sm">
+                            <tr><td colspan="4" class="p-4 pt-6 font-bold text-accent">Core Platform</td></tr>
+                            <tr><td class="px-6 py-4">User Seats</td><td class="px-6 py-4 text-center">3</td><td class="px-6 py-4 text-center">10</td><td class="px-6 py-4 text-center">Unlimited</td></tr>
+                            <tr><td class="px-6 py-4">WhatsApp Numbers</td><td class="px-6 py-4 text-center">1</td><td class="px-6 py-4 text-center">Up to 3</td><td class="px-6 py-4 text-center">Custom</td></tr>
+                            <tr><td colspan="4" class="p-4 pt-6 font-bold text-accent">Conversation Limits</td></tr>
+                            <tr><td class="px-6 py-4">Monthly Conversations</td><td class="px-6 py-4 text-center">1,000</td><td class="px-6 py-4 text-center">5,000</td><td class="px-6 py-4 text-center">Custom</td></tr>
+                            <tr><td class="px-6 py-4">Marketing Broadcast Contacts</td><td class="px-6 py-4 text-center">500</td><td class="px-6 py-4 text-center">2,500</td><td class="px-6 py-4 text-center">Custom</td></tr>
+                            <tr><td colspan="4" class="p-4 pt-6 font-bold text-accent">AI & Automation</td></tr>
+                            <tr><td class="px-6 py-4">FAQ & Support Automation</td><td class="px-6 py-4 text-center"><svg class="w-6 h-6 text-green_accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td><td class="px-6 py-4 text-center"><svg class="w-6 h-6 text-green_accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td><td class="px-6 py-4 text-center"><svg class="w-6 h-6 text-green_accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td></tr>
+                            <tr><td class="px-6 py-4">Knowledge Base Sources</td><td class="px-6 py-4 text-center">Docs & Q&A</td><td class="px-6 py-4 text-center">Docs, Q&A, URL</td><td class="px-6 py-4 text-center">All Sources</td></tr>
+                            <tr><td class="px-6 py-4">AI Personality Customization</td><td class="px-6 py-4 text-center">Basic</td><td class="px-6 py-4 text-center">Advanced</td><td class="px-6 py-4 text-center">Full Control</td></tr>
+                            <tr><td class="px-6 py-4">Lead Qualification Rules</td><td class="px-6 py-4 text-center text-muted">-</td><td class="px-6 py-4 text-center"><svg class="w-6 h-6 text-green_accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td><td class="px-6 py-4 text-center"><svg class="w-6 h-6 text-green_accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td></tr>
+                            <tr><td class="px-6 py-4">Automated Appointment Booking</td><td class="px-6 py-4 text-center text-muted">-</td><td class="px-6 py-4 text-center"><svg class="w-6 h-6 text-green_accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td><td class="px-6 py-4 text-center"><svg class="w-6 h-6 text-green_accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td></tr>
+                            <tr><td class="px-6 py-4">Rich Media Support (Images, Buttons)</td><td class="px-6 py-4 text-center text-muted">-</td><td class="px-6 py-4 text-center"><svg class="w-6 h-6 text-green_accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td><td class="px-6 py-4 text-center"><svg class="w-6 h-6 text-green_accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td></tr>
+                            <tr><td class="px-6 py-4">Live Chat & Human Handover</td><td class="px-6 py-4 text-center"><svg class="w-6 h-6 text-green_accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td><td class="px-6 py-4 text-center"><svg class="w-6 h-6 text-green_accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td><td class="px-6 py-4 text-center"><svg class="w-6 h-6 text-green_accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td></tr>
+                            <tr><td colspan="4" class="p-4 pt-6 font-bold text-accent">Integrations & API</td></tr>
+                            <tr><td class="px-6 py-4">Standard Integrations (Zapier, Sheets)</td><td class="px-6 py-4 text-center"><svg class="w-6 h-6 text-green_accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td><td class="px-6 py-4 text-center"><svg class="w-6 h-6 text-green_accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td><td class="px-6 py-4 text-center"><svg class="w-6 h-6 text-green_accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td></tr>
+                            <tr><td class="px-6 py-4">Premium CRM Integrations</td><td class="px-6 py-4 text-center text-muted">-</td><td class="px-6 py-4 text-center"><svg class="w-6 h-6 text-green_accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td><td class="px-6 py-4 text-center"><svg class="w-6 h-6 text-green_accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td></tr>
+                            <tr><td class="px-6 py-4">API & Webhook Access</td><td class="px-6 py-4 text-center text-muted">-</td><td class="px-6 py-4 text-center text-muted">-</td><td class="px-6 py-4 text-center"><svg class="w-6 h-6 text-green_accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td></tr>
+                            <tr><td colspan="4" class="p-4 pt-6 font-bold text-accent">Analytics & Support</td></tr>
+                            <tr><td class="px-6 py-4">Analytics Dashboard</td><td class="px-6 py-4 text-center">Basic</td><td class="px-6 py-4 text-center">Advanced</td><td class="px-6 py-4 text-center">Custom Reports</td></tr>
+                            <tr><td class="px-6 py-4">Data Export</td><td class="px-6 py-4 text-center text-muted">-</td><td class="px-6 py-4 text-center"><svg class="w-6 h-6 text-green_accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td><td class="px-6 py-4 text-center"><svg class="w-6 h-6 text-green_accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td></tr>
+                            <tr><td class="px-6 py-4">Support</td><td class="px-6 py-4 text-center">Email & Community</td><td class="px-6 py-4 text-center">Priority Email & Chat</td><td class="px-6 py-4 text-center">Dedicated Manager</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-20 bg-secondary">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-16" data-aos="fade-up"><h2 class="text-3xl md:text-4xl font-bold font-display mb-4">Frequently Asked Questions</h2></div>
+                <div class="max-w-3xl mx-auto space-y-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="faq-item bg-primary rounded-lg border border-white/10 p-6"><div class="faq-question flex justify-between items-center cursor-pointer"><h3 class="text-lg font-semibold">Is this compliant with WhatsApp's policies?</h3><svg class="faq-arrow w-6 h-6 text-green_accent transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg></div><div class="faq-answer hidden mt-4 text-white/70"><p>Absolutely. We operate exclusively through the official WhatsApp Business API, ensuring all communications are fully compliant with Meta's terms of service. Your account's safety and integrity are our top priority.</p></div></div>
+                    <div class="faq-item bg-primary rounded-lg border border-white/10 p-6"><div class="faq-question flex justify-between items-center cursor-pointer"><h3 class="text-lg font-semibold">What counts as one "conversation"?</h3><svg class="faq-arrow w-6 h-6 text-green_accent transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg></div><div class="faq-answer hidden mt-4 text-white/70"><p>A conversation is a 24-hour window of messaging between you and a customer. Any number of messages exchanged within that window counts as a single conversation, as per Meta's policies. A new conversation begins after 24 hours have passed since the last message from the customer.</p></div></div>
+                    <div class="faq-item bg-primary rounded-lg border border-white/10 p-6"><div class="faq-question flex justify-between items-center cursor-pointer"><h3 class="text-lg font-semibold">Can I change my plan later?</h3><svg class="faq-arrow w-6 h-6 text-green_accent transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg></div><div class="faq-answer hidden mt-4 text-white/70"><p>Yes, you can upgrade, downgrade, or cancel your plan at any time from your account settings. Upgrades take effect immediately, and downgrades apply at the start of your next billing cycle.</p></div></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- End of Main Content -->
+    
+    <!-- Footer -->
+    <footer class="py-8 bg-primary border-t border-white/10"><div class="container mx-auto px-6 text-center text-white/70"><p>&copy; 2024 SyncFlo Ai. All Rights Reserved.</p></div></footer>
+
+    <!-- SCRIPT TAG FOR AOS LIBRARY - THIS WAS MISSING -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({ duration: 800, once: true });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId.startsWith('#')) {
+                    e.preventDefault();
+                    document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // UPDATED FAQ Accordion Logic
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(clickedItem => {
+            const button = clickedItem.querySelector('.faq-question');
+            button.addEventListener('click', () => {
+                // First, close all other items
+                faqItems.forEach(item => {
+                    if (item !== clickedItem) {
+                        item.classList.remove('open');
+                        const answer = item.querySelector('.faq-answer');
+                        answer.classList.add('hidden');
+                    }
+                });
+                
+                // Then, toggle the clicked item
+                clickedItem.classList.toggle('open');
+                const answer = clickedItem.querySelector('.faq-answer');
+                answer.classList.toggle('hidden');
+            });
+        });
+        
+        // Pricing Toggle Logic
+        const priceToggle = document.getElementById('price-toggle');
+        if (priceToggle) {
+            priceToggle.addEventListener('change', function() {
+                const isAnnual = this.checked;
+                document.querySelectorAll('.price').forEach(p => p.textContent = p.dataset[isAnnual ? 'annual' : 'monthly']);
+                document.querySelectorAll('.price-period').forEach(p => p.textContent = isAnnual ? '/yr' : '/mo');
+            });
+        }
+    </script>
+</body>
+</html>

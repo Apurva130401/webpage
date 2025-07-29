@@ -493,10 +493,10 @@
         // 3. Define the initial prompt for the AI
         let chatHistory = [{
             role: "user",
-            parts: [{ text: "You are a friendly and helpful Sales Assistant for SyncFlo Ai. You have to talk in behalf of SyncFlo AI Your goal is to answer questions about the company and its products (WhatsApp Automation, AI Voice Sales Agent). If a user wants to book a demo, you MUST first ask them if they want a mock demo or a live demo by calling the `displayButtons` tool with the options 'Show me a mock demo' and 'Book a live demo'. If they choose live demo, you MUST use the `redirectToCalendly` tool after getting their name and email. If they choose mock demo, tell the user they can see it on our website at https://syncflo.xyz/demo. Try to convice the user to choose mock demo. Also tell them to check industry sections to see industry wise mock demos. Keep messages short. Do not make up information." }]
+            parts: [{ text: "You are a friendly and helpful assistant for SyncFlo Ai. Your goal is to answer questions about the company and its products (WhatsApp Automation, AI Voice Sales Agent). If a user wants to book a demo, you MUST first ask them if they want a mock demo or a live demo by calling the `displayButtons` tool with the options 'Show me a mock demo' and 'Book a live demo'. If they choose live demo, you MUST use the `redirectToCalendly` tool after getting their name and email. If they choose mock demo, tell the user they can see it on our website at https://syncflo.xyz/demo. Keep messages short. Do not make up information." }]
         }, {
             role: "model",
-            parts: [{ text: "Okay, I understand. I will answer questions, offer a choice of demos using buttons, try to convince user to choose mock demo and use the Calendly tool for live demos after getting the user's name and email. How can I help you?" }]
+            parts: [{ text: "Okay, I understand. I will answer questions, offer a choice of demos using buttons, and use the Calendly tool for live demos after getting the user's name and email. How can I help you?" }]
         }];
 
 
@@ -542,13 +542,30 @@
             removeTypingIndicator();
             const candidate = response.candidates[0];
 
-            if (candidate.content.parts[0].functionCall) {
-                const functionCall = candidate.content.parts[0].functionCall;
+            let textResponse = null;
+            let functionCall = null;
+
+            // Check all parts for text and function calls
+            candidate.content.parts.forEach(part => {
+                if (part.text) {
+                    textResponse = part.text;
+                } else if (part.functionCall) {
+                    functionCall = part.functionCall;
+                }
+            });
+
+            // First, display any text response
+            if (textResponse) {
+                addMessage(textResponse, 'ai');
+                chatHistory.push({ role: "model", parts: [{ text: textResponse }] });
+            }
+
+            // Then, execute any function call
+            if (functionCall) {
                 const functionName = functionCall.name;
                 const functionArgs = functionCall.args;
 
                 if (functionName === 'displayButtons') {
-                    // --- HANDLE BUTTON DISPLAY ---
                     const buttonContainer = document.createElement('div');
                     buttonContainer.className = 'chat-buttons';
                     functionArgs.buttons.forEach(label => {
@@ -556,32 +573,23 @@
                         button.className = 'chat-button';
                         button.textContent = label;
                         button.addEventListener('click', () => {
-                            // When button is clicked, send its text as a user message
                             sendMessage(label);
-                            // Remove buttons after one is clicked
                             buttonContainer.remove();
                         });
                         buttonContainer.appendChild(button);
                     });
                     chatMessages.appendChild(buttonContainer);
                     chatMessages.scrollTop = chatMessages.scrollHeight;
-
+                    // We don't call the API again, we wait for the user click
                 } else if (functionName === 'redirectToCalendly') {
-                    // --- HANDLE CALENDLY REDIRECT ---
                     const functionResult = tools.redirectToCalendly(functionArgs.name, functionArgs.email);
                     chatHistory.push({ role: "model", parts: [{ functionCall }] });
                     chatHistory.push({
                         role: "function",
                         parts: [{ functionResponse: { name: functionName, response: { content: functionResult } } }]
                     });
-                    await callGeminiApi();
+                    await callGeminiApi(); // Call again to get the confirmation text
                 }
-
-            } else if (candidate.content.parts[0].text) {
-                // It's a regular text response
-                const aiResponse = candidate.content.parts[0].text;
-                addMessage(aiResponse, 'ai');
-                chatHistory.push({ role: "model", parts: [{ text: aiResponse }] });
             }
         }
 

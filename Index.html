@@ -454,9 +454,12 @@
                 window.open(calendlyUrl, '_blank');
                 return `Success! I have opened the Calendly booking page for ${name}.`;
             },
-            // This is a placeholder. The actual button creation happens in the UI.
             displayButtons(buttons) {
                  return `Displayed buttons: ${buttons.join(', ')}`;
+            },
+            openLink(url) {
+                window.open(url, '_blank');
+                return `Successfully opened ${url}`;
             }
         };
 
@@ -487,13 +490,23 @@
                     },
                     "required": ["buttons"]
                 }
+            }, {
+                "name": "openLink",
+                "description": "Use this function to open any URL in a new browser tab.",
+                "parameters": {
+                    "type": "OBJECT",
+                    "properties": {
+                        "url": { "type": "STRING", "description": "The full URL to open." }
+                    },
+                    "required": ["url"]
+                }
             }]
         }];
         
         // 3. Define the initial prompt for the AI
         let chatHistory = [{
             role: "user",
-            parts: [{ text: "You are a friendly and helpful assistant for SyncFlo Ai. Your goal is to answer questions about the company and its products (WhatsApp Automation, AI Voice Sales Agent). If a user wants to book a demo, you MUST first ask them if they want a mock demo or a live demo by calling the `displayButtons` tool with the options 'Show me a mock demo' and 'Book a live demo'. If they choose live demo, you MUST use the `redirectToCalendly` tool after getting their name and email. If they choose mock demo, tell the user they can see it on our website at https://syncflo.xyz/demo. Keep messages short. Do not make up information." }]
+            parts: [{ text: "You are a friendly and helpful assistant for SyncFlo Ai. Your goal is to answer questions about the company and its products (WhatsApp Automation, AI Voice Sales Agent). If a user wants to book a demo, you MUST first ask them if they want a mock demo or a live demo by calling the `displayButtons` tool with the options 'Show me a mock demo' and 'Book a live demo'. If they choose live demo, you MUST use the `redirectToCalendly` tool after getting their name and email. If they choose mock demo, tell the user they can see it on our website at https://syncflo.xyz/demo. If a user asks about pricing, tell them it starts at $99/month and then immediately use the `openLink` tool to show them the full details at 'https://syncflo.xyz/pricing.html'. Keep messages short. Do not make up information." }]
         }, {
             role: "model",
             parts: [{ text: "Okay, I understand. I will answer questions, offer a choice of demos using buttons, and use the Calendly tool for live demos after getting the user's name and email. How can I help you?" }]
@@ -510,14 +523,12 @@
             messageElement.classList.add('chat-message', sender === 'user' ? 'user-message' : 'ai-message');
 
             if (sender === 'ai') {
-                // Regex to find URLs and wrap them in anchor tags
                 const urlRegex = /(https?:\/\/[^\s]+)/g;
-                // Sanitize the message to prevent XSS before setting innerHTML
                 const sanitizedMessage = message.replace(/</g, "&lt;").replace(/>/g, "&gt;");
                 const messageWithLinks = sanitizedMessage.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer" class="font-bold underline">$1</a>');
-                messageElement.innerHTML = messageWithLinks; // Use innerHTML to render the link
+                messageElement.innerHTML = messageWithLinks;
             } else {
-                messageElement.textContent = message; // User messages are plain text
+                messageElement.textContent = message;
             }
             
             chatMessages.appendChild(messageElement);
@@ -545,7 +556,6 @@
             let textResponse = null;
             let functionCall = null;
 
-            // Check all parts for text and function calls
             candidate.content.parts.forEach(part => {
                 if (part.text) {
                     textResponse = part.text;
@@ -554,13 +564,11 @@
                 }
             });
 
-            // First, display any text response
             if (textResponse) {
                 addMessage(textResponse, 'ai');
                 chatHistory.push({ role: "model", parts: [{ text: textResponse }] });
             }
 
-            // Then, execute any function call
             if (functionCall) {
                 const functionName = functionCall.name;
                 const functionArgs = functionCall.args;
@@ -580,7 +588,6 @@
                     });
                     chatMessages.appendChild(buttonContainer);
                     chatMessages.scrollTop = chatMessages.scrollHeight;
-                    // We don't call the API again, we wait for the user click
                 } else if (functionName === 'redirectToCalendly') {
                     const functionResult = tools.redirectToCalendly(functionArgs.name, functionArgs.email);
                     chatHistory.push({ role: "model", parts: [{ functionCall }] });
@@ -588,7 +595,15 @@
                         role: "function",
                         parts: [{ functionResponse: { name: functionName, response: { content: functionResult } } }]
                     });
-                    await callGeminiApi(); // Call again to get the confirmation text
+                    await callGeminiApi();
+                } else if (functionName === 'openLink') {
+                    const functionResult = tools.openLink(functionArgs.url);
+                     chatHistory.push({ role: "model", parts: [{ functionCall }] });
+                     chatHistory.push({
+                        role: "function",
+                        parts: [{ functionResponse: { name: functionName, response: { content: functionResult } } }]
+                    });
+                    await callGeminiApi();
                 }
             }
         }
@@ -622,7 +637,6 @@
             }
         }
 
-        // Modified sendMessage to accept an optional message parameter for buttons
         async function sendMessage(messageOverride = null) {
             const messageText = messageOverride || chatInput.value.trim();
             if (messageText === '') return;

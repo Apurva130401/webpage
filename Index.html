@@ -161,6 +161,26 @@
         .ai-message a:hover {
             color: #7000FF;
         }
+        .chat-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            align-self: flex-start;
+        }
+        .chat-button {
+            background-color: #2A3142;
+            border: 1px solid #00F0FF;
+            color: #00F0FF;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .chat-button:hover {
+            background-color: #00F0FF;
+            color: #141A28;
+        }
     </style>
 </head>
 <body>
@@ -427,16 +447,20 @@
 
         // --- Function Calling Setup ---
 
-        // 1. Define the tool (our JavaScript function)
+        // 1. Define the tools (our JavaScript functions)
         const tools = {
             redirectToCalendly(name, email) {
                 const calendlyUrl = `https://calendly.com/syncfloai/30min?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
                 window.open(calendlyUrl, '_blank');
                 return `Success! I have opened the Calendly booking page for ${name}.`;
+            },
+            // This is a placeholder. The actual button creation happens in the UI.
+            displayButtons(buttons) {
+                 return `Displayed buttons: ${buttons.join(', ')}`;
             }
         };
 
-        // 2. Define the tool's schema for the AI
+        // 2. Define the tools' schema for the AI
         const toolDefinitions = [{
             "functionDeclarations": [{
                 "name": "redirectToCalendly",
@@ -449,16 +473,30 @@
                     },
                     "required": ["name", "email"]
                 }
+            }, {
+                 "name": "displayButtons",
+                "description": "Display clickable suggestion buttons to the user in the chat.",
+                "parameters": {
+                    "type": "OBJECT",
+                    "properties": {
+                        "buttons": {
+                            "type": "ARRAY",
+                            "description": "An array of button labels to display.",
+                            "items": { "type": "STRING" }
+                        }
+                    },
+                    "required": ["buttons"]
+                }
             }]
         }];
         
         // 3. Define the initial prompt for the AI
         let chatHistory = [{
             role: "user",
-            parts: [{ text: "You are a friendly and helpful assistant for SyncFlo Ai. Your goal is to answer questions about the company and its products (WhatsApp Automation, AI Voice Sales Agent). If a user wants to book a demo, just ask them first if they want to see a mock demo or a live demo. Try to convince user to choose the mock demo though and try to keep the messages short and helpful. If they choose, live demo, you MUST use the `redirectToCalendly` tool. If they choose mock demo, tell the user that there is mock demo on our website where they can see how the WhatsApp AI works and also test the Voice Agent. Link to that demo page is https://syncflo.xyz/demo. Also tell the user that Industry specific demos are available on Industry Pages. Do NOT ask for the time or date, the user will select that on the Calendly page. First, get the user's name and email address before calling the tool. Do not make up information." }]
+            parts: [{ text: "You are a friendly and helpful assistant for SyncFlo Ai. Your goal is to answer questions about the company and its products (WhatsApp Automation, AI Voice Sales Agent). If a user wants to book a demo, you MUST first ask them if they want a mock demo or a live demo by calling the `displayButtons` tool with the options 'Show me a mock demo' and 'Book a live demo'. If they choose live demo, you MUST use the `redirectToCalendly` tool after getting their name and email. If they choose mock demo, tell the user they can see it on our website at https://syncflo.xyz/demo. Keep messages short. Do not make up information." }]
         }, {
             role: "model",
-            parts: [{ text: "Okay, I understand. I will answer questions and show them the mock demo and use the tool to book demos by first collecting the user's name and email. How can I help you?" }]
+            parts: [{ text: "Okay, I understand. I will answer questions, offer a choice of demos using buttons, and use the Calendly tool for live demos after getting the user's name and email. How can I help you?" }]
         }];
 
 
@@ -470,7 +508,18 @@
         function addMessage(message, sender) {
             const messageElement = document.createElement('div');
             messageElement.classList.add('chat-message', sender === 'user' ? 'user-message' : 'ai-message');
-            messageElement.textContent = message;
+
+            if (sender === 'ai') {
+                // Regex to find URLs and wrap them in anchor tags
+                const urlRegex = /(https?:\/\/[^\s]+)/g;
+                // Sanitize the message to prevent XSS before setting innerHTML
+                const sanitizedMessage = message.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                const messageWithLinks = sanitizedMessage.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer" class="font-bold underline">$1</a>');
+                messageElement.innerHTML = messageWithLinks; // Use innerHTML to render the link
+            } else {
+                messageElement.textContent = message; // User messages are plain text
+            }
+            
             chatMessages.appendChild(messageElement);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
@@ -494,25 +543,39 @@
             const candidate = response.candidates[0];
 
             if (candidate.content.parts[0].functionCall) {
-                // It's a function call!
                 const functionCall = candidate.content.parts[0].functionCall;
                 const functionName = functionCall.name;
                 const functionArgs = functionCall.args;
 
-                // Call the actual JavaScript function
-                const functionResult = tools[functionName](functionArgs.name, functionArgs.email);
-                
-                // Add the function call to history
-                chatHistory.push({ role: "model", parts: [{ functionCall }] });
-                
-                // Add the function's result to history so the AI knows what happened
-                 chatHistory.push({
-                    role: "function",
-                    parts: [{ functionResponse: { name: functionName, response: { content: functionResult } } }]
-                });
+                if (functionName === 'displayButtons') {
+                    // --- HANDLE BUTTON DISPLAY ---
+                    const buttonContainer = document.createElement('div');
+                    buttonContainer.className = 'chat-buttons';
+                    functionArgs.buttons.forEach(label => {
+                        const button = document.createElement('button');
+                        button.className = 'chat-button';
+                        button.textContent = label;
+                        button.addEventListener('click', () => {
+                            // When button is clicked, send its text as a user message
+                            sendMessage(label);
+                            // Remove buttons after one is clicked
+                            buttonContainer.remove();
+                        });
+                        buttonContainer.appendChild(button);
+                    });
+                    chatMessages.appendChild(buttonContainer);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
 
-                // Now, send this updated history back to the AI to get a final, natural language response
-                await callGeminiApi();
+                } else if (functionName === 'redirectToCalendly') {
+                    // --- HANDLE CALENDLY REDIRECT ---
+                    const functionResult = tools.redirectToCalendly(functionArgs.name, functionArgs.email);
+                    chatHistory.push({ role: "model", parts: [{ functionCall }] });
+                    chatHistory.push({
+                        role: "function",
+                        parts: [{ functionResponse: { name: functionName, response: { content: functionResult } } }]
+                    });
+                    await callGeminiApi();
+                }
 
             } else if (candidate.content.parts[0].text) {
                 // It's a regular text response
@@ -551,19 +614,22 @@
             }
         }
 
-        async function sendMessage() {
-            const messageText = chatInput.value.trim();
+        // Modified sendMessage to accept an optional message parameter for buttons
+        async function sendMessage(messageOverride = null) {
+            const messageText = messageOverride || chatInput.value.trim();
             if (messageText === '') return;
 
             addMessage(messageText, 'user');
-            chatInput.value = '';
+            if (!messageOverride) {
+                chatInput.value = '';
+            }
             showTypingIndicator();
             
             chatHistory.push({ role: "user", parts: [{ text: messageText }] });
             await callGeminiApi();
         }
 
-        chatSend.addEventListener('click', sendMessage);
+        chatSend.addEventListener('click', () => sendMessage());
         chatInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') sendMessage();
         });

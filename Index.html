@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
     <script>
         tailwind.config = {
             theme: {
@@ -196,7 +197,7 @@
                     <a href="#features" class="nav-link text-white/80 hover:text-accent transition-colors">Features</a>
                     <a href="#products" class="nav-link text-white/80 hover:text-accent transition-colors">Products</a>
 					<a href="https://careers.syncflo.xyz" class="nav-link text-white/80 hover:text-accent transition-colors">Careers</a>
-                    <a href="#testimonials" class="nav-link text-white/80 hover:text-accent transition-colors hidden">Testimonials</a>
+                    <a href="#testimonials" class="nav-link text-white/80 hover:text-accent transition-colors">Testimonials</a>
                     <a href="#about" class="nav-link text-white/80 hover:text-accent transition-colors">About</a>
 					<a href="waitlist.html" class="nav-link text-white/80 hover:text-accent transition-colors">Waitlist</a>
                     <a href="contact.html" class="bg-gradient-to-r from-accent to-accent2 text-primary font-semibold px-6 py-2 rounded-full hover:opacity-90 transition-opacity">Contact Us</a>
@@ -215,7 +216,7 @@
                 <a href="#features" class="nav-link block text-white/80 hover:text-accent transition-colors">Features</a>
 				<a href="https://careers.syncflo.xyz" class="nav-link text-white/80 hover:text-accent transition-colors">Careers</a>
                 <a href="#products" class="nav-link block text-white/80 hover:text-accent transition-colors">Products</a>
-                <a href="#testimonials" class="nav-link block text-white/80 hover:text-accent transition-colors hidden">Testimonials</a>
+                <a href="#testimonials" class="nav-link block text-white/80 hover:text-accent transition-colors">Testimonials</a>
                 <a href="#about" class="nav-link block text-white/80 hover:text-accent transition-colors">About</a>
                 <a href="contact.html" class="block bg-gradient-to-r from-accent to-accent2 text-primary font-semibold px-6 py-2 rounded-full text-center hover:opacity-90 transition-opacity">Contact Us</a>
             </div>
@@ -281,7 +282,6 @@
         </div>
     </section>
 
-    <!-- Other sections remain the same -->
     <section id="trust-metrics" class="py-20 bg-secondary">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
@@ -349,6 +349,17 @@
         </div>
     </section>
     
+    <section id="testimonials" class="py-20 bg-secondary">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">What Our <span class="gradient-text">Customers Say</span></h2>
+                <p class="text-white/70 max-w-2xl mx-auto">See the positive impact SyncFlo Ai has had on businesses like yours.</p>
+            </div>
+            <div class="trustpilot-widget mx-auto max-w-2xl" data-locale="en-US" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="689e779d226916f97539fd86" data-style-height="52px" data-style-width="100%" data-token="bcb1c7cf-6512-4a42-9795-65b22516bb18">
+                <a href="https://www.trustpilot.com/review/syncflo.xyz" target="_blank" rel="noopener">Trustpilot</a>
+            </div>
+            </div>
+    </section>
     <footer class="bg-secondary border-t border-white/10 py-12" data-aos="fade-up">
         <div class="container mx-auto px-6 text-center text-white/70">
             <div class="flex justify-center space-x-6 mb-6">
@@ -360,7 +371,6 @@
         </div>
     </footer>
 
-    <!-- Chatbot HTML -->
     <div id="chat-bubble">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.02-3.11A7.002 7.002 0 012 10c0-3.866, 3.582-7, 8-7s8, 3.134, 8, 7zM4.416, 14.65A6.986, 6.986, 0, 0, 0, 10, 16c3.309, 0, 6-2.691, 6-6s-2.691-6-6-6-6, 2.691-6, 6c0, 1.562.602, 3.002, 1.626, 4.118L4.416, 14.65z" clip-rule="evenodd" />
@@ -375,8 +385,7 @@
             </button>
         </div>
         <div id="chat-messages" class="flex-1 p-4 overflow-y-auto flex flex-col">
-            <!-- Messages will be appended here -->
-             <div class="chat-message ai-message">
+            <div class="chat-message ai-message">
                 Hello! How can I help you with SyncFlo Ai today? Ask me about our products or book a demo!
             </div>
         </div>

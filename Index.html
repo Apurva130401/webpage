@@ -515,16 +515,19 @@
         <div id="chat-messages" class="flex-1 p-4 overflow-y-auto flex flex-col">
             <!-- Messages will be appended here -->
              <div class="chat-message ai-message">
-                Hello! How can I help you with SyncFlo Ai today? Ask me about our products or book a demo!
+                Hello! I'm your sales assistant. I can answer questions about SyncFlo Ai and our products. Try asking me to create a quick pitch for you!
             </div>
         </div>
         <div class="p-4 bg-secondary border-t border-white/10">
             <div class="flex items-center">
-                <input type="text" id="chat-input" placeholder="Type your message..." class="flex-1 bg-primary border border-white/10 rounded-full py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-accent">
+                <input type="text" id="chat-input" placeholder="Ask a question or type 'create pitch'..." class="flex-1 bg-primary border border-white/10 rounded-full py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-accent">
                 <button id="chat-send" class="ml-3 p-2 bg-gradient-to-r from-accent to-accent2 rounded-full">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 </button>
             </div>
+             <button id="generate-pitch" class="w-full mt-3 bg-white/10 border border-white/20 text-white font-semibold px-8 py-2 rounded-full text-center hover:bg-white/20 transition-colors">
+                ✨ Generate a Quick Pitch
+            </button>
         </div>
     </div>
 
@@ -585,6 +588,7 @@
         const chatMessages = document.getElementById('chat-messages');
         const chatInput = document.getElementById('chat-input');
         const chatSend = document.getElementById('chat-send');
+        const generatePitchButton = document.getElementById('generate-pitch');
         
         // IMPORTANT: Add your own Gemini API Key here
         const apiKey = "AIzaSyDftfcS4AQNPYo3Q2joZmYikWB4vpO_SfI"; 
@@ -761,12 +765,14 @@
             }
         }
 
-        async function callGeminiApi() {
+        async function callGeminiApi(prompt = null) {
             try {
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
                 
+                const currentHistory = prompt ? [...chatHistory, { role: 'user', parts: [{ text: prompt }] }] : chatHistory;
+
                 const payload = { 
-                    contents: chatHistory,
+                    contents: currentHistory,
                     tools: toolDefinitions
                 };
 
@@ -792,6 +798,48 @@
             }
         }
 
+        async function generateQuickPitch() {
+            showTypingIndicator();
+            const prompt = `Based on the conversation history and SyncFlo Ai's products (WhatsApp Automation and AI Voice Sales Agent), write a short, compelling sales pitch for a business. The pitch should be no more than 3 sentences. Do not use any placeholders like [Client Name] or [Your Company].`;
+            
+            // Clear history and add new prompt to get a fresh pitch
+            const pitchHistory = [{
+                role: "user",
+                parts: [{ text: prompt }]
+            }];
+
+            try {
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                
+                const payload = { 
+                    contents: pitchHistory
+                };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorBody = await response.text();
+                    console.error("API Error Body:", errorBody);
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
+                
+                const result = await response.json();
+                removeTypingIndicator();
+                
+                const generatedPitch = result.candidates[0].content.parts[0].text;
+                addMessage(`✨ Here is a quick pitch for you: "${generatedPitch}"`, 'ai');
+
+            } catch (error) {
+                console.error("Error generating pitch:", error);
+                removeTypingIndicator();
+                addMessage("Sorry, I couldn't generate a pitch right now. Please try again.", 'ai');
+            }
+        }
+
         async function sendMessage(messageOverride = null) {
             const messageText = messageOverride || chatInput.value.trim();
             if (messageText === '') return;
@@ -810,6 +858,9 @@
         chatInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') sendMessage();
         });
+
+        generatePitchButton.addEventListener('click', () => generateQuickPitch());
+
 
     </script>
 </body>

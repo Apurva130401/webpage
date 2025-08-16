@@ -280,543 +280,6 @@
             z-index: -1;
         }
         
-        /* Chatbot Styles */
-        #chat-bubble {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 4rem;
-            height: 4rem;
-            background: linear-gradient(135deg, #00F0FF, #7000FF);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 1000;
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
-            transition: all 0.3s ease;
-            animation: glow-pulse 2s infinite;
-        }
-        
-        #chat-bubble:hover {
-            transform: scale(1.1) rotate(15deg);
-        }
-        
-        #chat-window {
-            position: fixed;
-            bottom: 7rem;
-            right: 2rem;
-            width: 90%;
-            max-width: 400px;
-            height: 70vh;
-            max-height: 600px;
-            background: linear-gradient(145deg, #141A28, #0B0F19);
-            border-radius: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            transform: translateY(20px) scale(0.95);
-            opacity: 0;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            pointer-events: none;
-        }
-        
-        #chat-window.open {
-            transform: translateY(0) scale(1);
-            opacity: 1;
-            pointer-events: auto;
-        }
-        
-        .chat-message {
-            padding: 0.75rem 1rem;
-            border-radius: 0.75rem;
-            margin-bottom: 0.5rem;
-            max-width: 80%;
-            line-height: 1.5;
-            word-wrap: break-word;
-            position: relative;
-        }
-        
-        .user-message {
-            background: linear-gradient(135deg, #00F0FF, #7000FF);
-            color: #0B0F19;
-            align-self: flex-end;
-            animation: neon-flicker 3s infinite alternate;
-        }
-        
-        .ai-message {
-            background-color: rgba(42, 49, 66, 0.7);
-            color: white;
-            align-self: flex-start;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(0, 240, 255, 0.2);
-        }
-        
-        .ai-message a {
-            color: #00F0FF;
-            text-decoration: underline;
-            font-weight: bold;
-        }
-        
-        .ai-message a:hover {
-            color: #7000FF;
-        }
-        
-        .chat-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-            align-self: flex-start;
-        }
-        
-        .chat-button {
-            background-color: rgba(42, 49, 66, 0.7);
-            border: 1px solid #00F0FF;
-            color: #00F0FF;
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            backdrop-filter: blur(5px);
-        }
-        
-        .chat-button:hover {
-            background-color: #00F0FF;
-            color: #141A28;
-            transform: scale(1.05);
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
-        }
-        
-        /* Navigation enhancements */
-        .nav-link {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #00F0FF, #7000FF);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        /* Cyber button style */
-        .cyber-button {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            z-index: 1;
-        }
-        
-        .cyber-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            z-index: -1;
-            transition: left 0.5s ease;
-        }
-        
-        .cyber-button:hover::before {
-            left: 100%;
-        }
-        
-        /* Glitch text effect */
-        .glitch {
-            position: relative;
-            color: white;
-            font-size: 4rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
-                         -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-                         0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
-            animation: glitch 500ms infinite;
-        }
-        
-        .glitch span {
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-        
-        .glitch span:first-child {
-            animation: glitch-1 500ms infinite;
-            color: #00F0FF;
-            z-index: -1;
-        }
-        
-        .glitch span:last-child {
-            animation: glitch-2 500ms infinite;
-            color: #7000FF;
-            z-index: -2;
-        }
-        
-        @keyframes glitch {
-            0% {
-                text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
-                            -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-                            0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
-            }
-            14% {
-                text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
-                            -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-                            0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
-            }
-            15% {
-                text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
-                            0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
-                            -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
-            }
-            49% {
-                text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
-                            0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
-                            -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
-            }
-            50% {
-                text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
-                            0.05em 0 0 rgba(0, 255, 0, 0.75),
-                            0 -0.05em 0 rgba(0, 0, 255, 0.75);
-            }
-            99% {
-                text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
-                            0.05em 0 0 rgba(0, 255, 0, 0.75),
-                            0 -0.05em 0 rgba(0, 0, 255, 0.75);
-            }
-            100% {
-                text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75),
-                            -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
-                            -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
-            }
-        }
-        
-        @keyframes glitch-1 {
-            0%, 100% { clip-path: inset(20% 0 30% 0); transform: translate(-2px, 2px); }
-            20% { clip-path: inset(50% 0 20% 0); transform: translate(2px, -2px); }
-            40% { clip-path: inset(10% 0 60% 0); transform: translate(-2px, 2px); }
-            60% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -2px); }
-            80% { clip-path: inset(5% 0 90% 0); transform: translate(-2px, 2px); }
-        }
-        
-        @keyframes glitch-2 {
-            0%, 100% { clip-path: inset(60% 0 10% 0); transform: translate(2px, -1px); }
-            20% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 1px); }
-            40% { clip-path: inset(70% 0 10% 0); transform: translate(2px, -1px); }
-            60% { clip-path: inset(30% 0 50% 0); transform: translate(-2px, 1px); }
-            80% { clip-path: inset(10% 0 80% 0); transform: translate(2px, -1px); }
-        }
-        
-        /* Cyberpunk card effect */
-        .cyber-card {
-            position: relative;
-            background: rgba(20, 26, 40, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            border-radius: 0.75rem;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .cyber-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #00F0FF, #7000FF, #00F0FF);
-            border-radius: 0.75rem;
-            opacity: 0;
-            z-index: -1;
-            transition: opacity 0.3s ease;
-            filter: blur(5px);
-        }
-        
-        .cyber-card:hover::before {
-            opacity: 0.7;
-        }
-        
-        .cyber-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 240, 255, 0.2);
-        }
-        
-        /* Loading animation */
-        .loader {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(0, 240, 255, 0.2);
-            border-radius: 50%;
-            border-top-color: #00F0FF;
-            animation: spin 1s ease-in-out infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Particle background */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        .particle {
-            position: absolute;
-            background-color: rgba(0, 240, 255, 0.5);
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0;
-            animation: float-particle 10s infinite;
-        }
-        
-        @keyframes float-particle {
-            0% {
-                transform: translateY(100vh) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.4;
-            }
-            90% {
-                opacity: 0.4;
-            }
-            100% {
-                transform: translateY(-100vh) scale(1);
-                opacity: 0;
-            }
-        }
-        
-        /* Holographic display effect */
-        .hologram-display {
-            position: relative;
-            background: linear-gradient(145deg, rgba(20, 26, 40, 0.8), rgba(11, 15, 25, 0.8));
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            border-radius: 0.75rem;
-            overflow: hidden;
-        }
-        
-        .hologram-display::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent 30%,
-                rgba(0, 240, 255, 0.1) 50%,
-                transparent 70%
-            );
-            transform: rotate(45deg);
-            animation: hologram-sweep 4s infinite;
-        }
-        
-        @keyframes hologram-sweep {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-        
-        /* Matrix rain effect */
-        .matrix-rain {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
-            opacity: 0.05;
-        }
-        
-        .matrix-column {
-            position: absolute;
-            top: -100%;
-            font-family: monospace;
-            font-size: 14px;
-            line-height: 14px;
-            color: #00F0FF;
-            animation: matrix-rain linear infinite;
-        }
-        
-        /* Orbit animation */
-        .orbit-container {
-            position: relative;
-            width: 300px;
-            height: 300px;
-            margin: 0 auto;
-        }
-        
-        .orbit-item {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 40px;
-            height: 40px;
-            margin-top: -20px;
-            margin-left: -20px;
-            border-radius: 50%;
-            background: rgba(0, 240, 255, 0.7);
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
-        }
-        
-        .orbit-item:nth-child(1) {
-            animation: orbit 10s linear infinite;
-        }
-        
-        .orbit-item:nth-child(2) {
-            animation: orbit 15s linear infinite reverse;
-            background: rgba(112, 0, 255, 0.7);
-            box-shadow: 0 0 15px rgba(112, 0, 255, 0.5);
-        }
-        
-        .orbit-item:nth-child(3) {
-            animation: orbit 20s linear infinite;
-            background: rgba(0, 255, 135, 0.7);
-            box-shadow: 0 0 15px rgba(0, 255, 135, 0.5);
-        }
-        
-        /* Parallax effect */
-        .parallax {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .parallax-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        
-        /* Scroll reveal animations */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-        
-        .scroll-reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* 3D card flip effect */
-        .flip-card {
-            perspective: 1000px;
-            width: 100%;
-            height: 300px;
-        }
-        
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.8s;
-            transform-style: preserve-3d;
-        }
-        
-        .flip-card:hover .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-        
-        .flip-card-front, .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border-radius: 0.75rem;
-            overflow: hidden;
-        }
-        
-        .flip-card-back {
-            transform: rotateY(180deg);
-        }
-        
-        /* Typing effect */
-        .typing-effect {
-            overflow: hidden;
-            border-right: 2px solid #00F0FF;
-            white-space: nowrap;
-            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-        }
-        
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-        
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #00F0FF }
-        }
-        
-        /* Morphing background */
-        .morphing-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .morphing-bg::before, .morphing-bg::after {
-            content: '';
-            position: absolute;
-            border-radius: 50%;
-        }
-        
-        .morphing-bg::before {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, transparent 70%);
-            top: -150px;
-            left: -150px;
-            animation: morphing 15s ease-in-out infinite;
-        }
-        
-        .morphing-bg::after {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(112, 0, 255, 0.1) 0%, transparent 70%);
-            bottom: -200px;
-            right: -200px;
-            animation: morphing 20s ease-in-out infinite reverse;
-        }
-        
-        @keyframes morphing {
-            0%, 100% { border-radius: 50%; transform: scale(1) rotate(0deg); }
-            33% { border-radius: 40% 60% 70% 30% / 40% 50% 50% 60%; transform: scale(1.1) rotate(10deg); }
-            66% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; transform: scale(0.9) rotate(-10deg); }
-        }
-        
         /* Mobile responsiveness */
         @media (max-width: 768px) {
             .hero-pattern {
@@ -928,8 +391,8 @@
         
         <div class="container mx-auto px-6 relative z-10">
             <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-12 md:mb-0">
-                    <h1 class="text-4xl md:text-6xl font-bold font-display leading-tight mb-6" data-aos="fade-down">
+                <div class="md:w-1/2 mb-12 md:mb-0" data-aos="fade-right">
+                    <h1 class="text-4xl md:text-6xl font-bold font-display leading-tight mb-6">
                         Automate Your Business With <span class="shimmer-text">Intelligent AI</span>
                     </h1>
                     <p class="text-xl text-white/80 mb-8 max-w-lg typing-effect" data-aos="fade-down" data-aos-delay="100">
@@ -1014,7 +477,6 @@
         </div>
     </section>
     
-    <!-- New 'Why Choose Us' Section -->
     <section id="why-us" class="py-20 bg-primary relative overflow-hidden">
         <div class="cyber-grid"></div>
         <div class="container mx-auto px-6 relative z-10">
@@ -1054,7 +516,6 @@
         </div>
     </section>
     
-    <!-- Updated Features Section with Products -->
     <section id="features" class="py-20 bg-secondary relative overflow-hidden">
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center mb-16" data-aos="fade-up">
@@ -1116,7 +577,6 @@
         </div>
     </section>
     
-    <!-- New 'How It Works' Section -->
     <section id="how-it-works" class="py-20 bg-primary relative overflow-hidden">
         <div class="cyber-grid"></div>
         <div class="container mx-auto px-6 relative z-10">
@@ -1144,7 +604,6 @@
         </div>
     </section>
     
-    <!-- New Technology Section (moved up) -->
     <section id="technology" class="py-20 bg-secondary relative overflow-hidden parallax">
         <div class="cyber-grid"></div>
         <div class="container mx-auto px-6 relative z-10">
@@ -1192,7 +651,7 @@
             </div>
         </div>
     </section>
-    
+
     <section id="about" class="py-20 bg-primary relative overflow-hidden">
         <div class="cyber-grid"></div>
         <div class="container mx-auto px-6 relative z-10">
@@ -1249,7 +708,7 @@
     <!-- Chatbot HTML -->
     <div id="chat-bubble">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.02-3.11A7.002 7.002 0 012 10c0-3.866, 3.582-7, 8-7s8, 3.134, 8, 7zM4.416, 14.65A6.986, 6.986 0, 0, 0, 10, 16c3.309, 0, 6-2.691, 6-6s-2.691-6-6-6-6, 2.691-6, 6c0, 1.562.602, 3.002, 1.626, 4.118L4.416, 14.65z" clip-rule="evenodd" />
+            <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.02-3.11A7.002 7.002 0 012 10c0-3.866, 3.582-7, 8-7s8, 3.134, 8, 7zM4.416, 14.65A6.986, 6.986, 0, 0, 0, 10, 16c3.309, 0, 6-2.691, 6-6s-2.691-6-6-6-6, 2.691-6, 6c0, 1.562.602, 3.002, 1.626, 4.118L4.416, 14.65z" clip-rule="evenodd" />
         </svg>
     </div>
     <div id="chat-window" class="">
@@ -1262,18 +721,22 @@
         <div id="chat-messages" class="flex-1 p-4 overflow-y-auto flex flex-col">
             <!-- Messages will be appended here -->
              <div class="chat-message ai-message">
-                Hello! How can I help you with SyncFlo Ai today? Ask me about our products or book a demo!
+                Hello! I'm your sales assistant. I can answer questions about SyncFlo Ai and our products. Try asking me to create a quick pitch for you!
             </div>
         </div>
         <div class="p-4 bg-secondary border-t border-white/10">
             <div class="flex items-center">
-                <input type="text" id="chat-input" placeholder="Type your message..." class="flex-1 bg-primary border border-white/10 rounded-full py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-accent">
+                <input type="text" id="chat-input" placeholder="Ask a question or type 'create pitch'..." class="flex-1 bg-primary border border-white/10 rounded-full py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-accent">
                 <button id="chat-send" class="ml-3 p-2 bg-gradient-to-r from-accent to-accent2 rounded-full">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 </button>
             </div>
+             <button id="generate-pitch" class="w-full mt-3 bg-white/10 border border-white/20 text-white font-semibold px-8 py-2 rounded-full text-center hover:bg-white/20 transition-colors">
+                ✨ Generate a Quick Pitch
+            </button>
         </div>
     </div>
+
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
@@ -1282,11 +745,40 @@
             duration: 800,
             once: true,
         });
-        
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get elements
+            const nav = document.getElementById('navbar');
+            const heroSection = document.getElementById('home');
+            const orb1 = document.getElementById('orb1');
+            const orb2 = document.getElementById('orb2');
+
+            // Nav and Parallax on Scroll
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const heroHeight = heroSection.offsetHeight;
+
+                // Nav bar change
+                if (scrollY > heroHeight - nav.offsetHeight) {
+                    nav.classList.add('bg-primary/80', 'backdrop-blur-lg', 'border-b', 'border-white/10');
+                } else {
+                    nav.classList.remove('bg-primary/80', 'backdrop-blur-lg', 'border-b', 'border-white/10');
+                }
+
+                // Parallax effect on orbs
+                if (orb1) {
+                    orb1.style.transform = `translateY(${scrollY * 0.3}px) scale(1.2)`;
+                }
+                if (orb2) {
+                    orb2.style.transform = `translateY(${scrollY * -0.2}px) scale(1.2)`;
+                }
+            });
+        });
+
         document.getElementById('menu-toggle').addEventListener('click', function() {
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
-        
+
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function() {
                 const targetId = this.getAttribute('href');
@@ -1415,9 +907,11 @@
         const chatMessages = document.getElementById('chat-messages');
         const chatInput = document.getElementById('chat-input');
         const chatSend = document.getElementById('chat-send');
+        const generatePitchButton = document.getElementById('generate-pitch');
         
         // IMPORTANT: Add your own Gemini API Key here
         const apiKey = "AIzaSyDftfcS4AQNPYo3Q2joZmYikWB4vpO_SfI"; 
+
         // --- Function Calling Setup ---
         // 1. Define the tools (our JavaScript functions)
         const tools = {
@@ -1483,12 +977,16 @@
             parts: [{ text: "Okay, I understand. My main goal is to be a helpful sales assistant, understand customer needs, and explain how our products can help. I will use my tools to provide demos and pricing information when appropriate. How can I help you today?" }]
         }];
 
+
         // --- Chat Logic ---
+
         chatBubble.addEventListener('click', () => chatWindow.classList.toggle('open'));
         closeChat.addEventListener('click', () => chatWindow.classList.remove('open'));
+
         function addMessage(message, sender) {
             const messageElement = document.createElement('div');
             messageElement.classList.add('chat-message', sender === 'user' ? 'user-message' : 'ai-message');
+
             if (sender === 'ai') {
                 const urlRegex = /(https?:\/\/[^\s]+)/g;
                 const sanitizedMessage = message.replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -1515,16 +1013,20 @@
             const typingElement = document.getElementById('typing-indicator');
             if (typingElement) typingElement.remove();
         }
+
         async function handleAiResponse(response) {
             removeTypingIndicator();
             const candidate = response.candidates[0];
+
             if (!candidate || !candidate.content || !candidate.content.parts) {
                 addMessage("Sorry, I received an invalid response. Please try again.", 'ai');
                 return;
             }
+
             const modelResponsePart = { role: "model", parts: [] };
             let textResponse = null;
             let functionCall = null;
+
             candidate.content.parts.forEach(part => {
                 if (part.text) {
                     textResponse = part.text;
@@ -1534,14 +1036,17 @@
                     modelResponsePart.parts.push({ functionCall: functionCall });
                 }
             });
+
             // Add the full model response to history first
             if (modelResponsePart.parts.length > 0) {
                  chatHistory.push(modelResponsePart);
             }
+
             // Then, process the parts for the UI
             if (textResponse) {
                 addMessage(textResponse, 'ai');
             }
+
             if (functionCall) {
                 const functionName = functionCall.name;
                 const functionArgs = functionCall.args;
@@ -1576,19 +1081,24 @@
                 }
             }
         }
-        async function callGeminiApi() {
+
+        async function callGeminiApi(prompt = null) {
             try {
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
                 
+                const currentHistory = prompt ? [...chatHistory, { role: 'user', parts: [{ text: prompt }] }] : chatHistory;
+
                 const payload = { 
-                    contents: chatHistory,
+                    contents: currentHistory,
                     tools: toolDefinitions
                 };
+
                 const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
+
                 if (!response.ok) {
                     const errorBody = await response.text();
                     console.error("API Error Body:", errorBody);
@@ -1597,15 +1107,60 @@
                 
                 const result = await response.json();
                 await handleAiResponse(result);
+
             } catch (error) {
                 console.error("Error calling Gemini API:", error);
                 removeTypingIndicator();
                 addMessage("Sorry, something went wrong. Please check your API key and the console for details.", 'ai');
             }
         }
+
+        async function generateQuickPitch() {
+            showTypingIndicator();
+            const prompt = `Based on the conversation history and SyncFlo Ai's products (WhatsApp Automation and AI Voice Sales Agent), write a short, compelling sales pitch for a business. The pitch should be no more than 3 sentences. Do not use any placeholders like [Client Name] or [Your Company].`;
+            
+            // Clear history and add new prompt to get a fresh pitch
+            const pitchHistory = [{
+                role: "user",
+                parts: [{ text: prompt }]
+            }];
+
+            try {
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                
+                const payload = { 
+                    contents: pitchHistory
+                };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorBody = await response.text();
+                    console.error("API Error Body:", errorBody);
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
+                
+                const result = await response.json();
+                removeTypingIndicator();
+                
+                const generatedPitch = result.candidates[0].content.parts[0].text;
+                addMessage(`✨ Here is a quick pitch for you: "${generatedPitch}"`, 'ai');
+
+            } catch (error) {
+                console.error("Error generating pitch:", error);
+                removeTypingIndicator();
+                addMessage("Sorry, I couldn't generate a pitch right now. Please try again.", 'ai');
+            }
+        }
+
         async function sendMessage(messageOverride = null) {
             const messageText = messageOverride || chatInput.value.trim();
             if (messageText === '') return;
+
             addMessage(messageText, 'user');
             if (!messageOverride) {
                 chatInput.value = '';
@@ -1615,10 +1170,15 @@
             chatHistory.push({ role: "user", parts: [{ text: messageText }] });
             await callGeminiApi();
         }
+
         chatSend.addEventListener('click', () => sendMessage());
         chatInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') sendMessage();
         });
+
+        generatePitchButton.addEventListener('click', () => generateQuickPitch());
+
+
     </script>
 </body>
 </html>

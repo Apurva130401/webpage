@@ -34,72 +34,6 @@
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         display: ['Space Grotesk', 'sans-serif']
-                    },
-                    animation: {
-                        'glow-pulse': 'glow-pulse 2s infinite',
-                        'float-slow': 'float 8s ease-in-out infinite',
-                        'float-fast': 'float 4s ease-in-out infinite',
-                        'text-shimmer': 'text-shimmer 3s infinite',
-                        'cyber-move': 'cyber-move 15s linear infinite',
-                        'hologram': 'hologram 4s ease-in-out infinite',
-                        'neon-flicker': 'neon-flicker 3s infinite alternate',
-                        'matrix-rain': 'matrix-rain 10s linear infinite',
-                        'orbit': 'orbit 20s linear infinite',
-                        'pulse-slow': 'pulse-slow 4s infinite',
-                        'slide-up': 'slide-up 0.5s ease-out',
-                        'zoom-in': 'zoom-in 0.6s ease-out',
-                        'rotate-3d': 'rotate-3d 15s linear infinite',
-                    },
-                    keyframes: {
-                        'glow-pulse': {
-                            '0%, 100%': { 'box-shadow': '0 0 20px rgba(0, 240, 255, 0.5)' },
-                            '50%': { 'box-shadow': '0 0 30px rgba(112, 0, 255, 0.8), 0 0 40px rgba(0, 240, 255, 0.6)' },
-                        },
-                        'float': {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        },
-                        'text-shimmer': {
-                            '0%': { 'background-position': '0% 50%' },
-                            '50%': { 'background-position': '100% 50%' },
-                            '100%': { 'background-position': '0% 50%' },
-                        },
-                        'cyber-move': {
-                            '0%': { transform: 'translateX(-100%)' },
-                            '100%': { transform: 'translateX(100%)' },
-                        },
-                        'hologram': {
-                            '0%, 100%': { opacity: '0.7', transform: 'translateZ(0)' },
-                            '50%': { opacity: '1', transform: 'translateZ(20px)' },
-                        },
-                        'neon-flicker': {
-                            '0%, 19%, 21%, 23%, 25%, 54%, 56%, 100%': { opacity: '1' },
-                            '20%, 24%, 55%': { opacity: '0.5' },
-                        },
-                        'matrix-rain': {
-                            '0%': { transform: 'translateY(-100%)' },
-                            '100%': { transform: 'translateY(100vh)' },
-                        },
-                        'orbit': {
-                            '0%': { transform: 'rotate(0deg) translateX(150px) rotate(0deg)' },
-                            '100%': { transform: 'rotate(360deg) translateX(150px) rotate(-360deg)' },
-                        },
-                        'pulse-slow': {
-                            '0%, 100%': { opacity: '0.3' },
-                            '50%': { opacity: '0.8' },
-                        },
-                        'slide-up': {
-                            '0%': { transform: 'translateY(30px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        },
-                        'zoom-in': {
-                            '0%': { transform: 'scale(0.8)', opacity: '0' },
-                            '100%': { transform: 'scale(1)', opacity: '1' },
-                        },
-                        'rotate-3d': {
-                            '0%': { transform: 'perspective(1000px) rotateY(0deg)' },
-                            '100%': { transform: 'perspective(1000px) rotateY(360deg)' },
-                        }
                     }
                 }
             }
@@ -112,239 +46,178 @@
             color: white;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-            position: relative;
         }
-        
-        /* Cyberpunk grid background */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -1;
-        }
-        
         .gradient-text {
             background: linear-gradient(90deg, #00F0FF, #7000FF);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
-        
-        .shimmer-text {
-            background: linear-gradient(90deg, #00F0FF, #7000FF, #00F0FF);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: text-shimmer 3s infinite;
-        }
-        
-        .neon-border { 
-            position: relative; 
-            overflow: hidden;
-        }
-        
-        .neon-border::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.4), transparent);
-            z-index: 1;
-            animation: cyber-move 3s infinite;
-        }
-        
+        .neon-border { position: relative; }
         .neon-border::after {
             content: '';
             position: absolute;
-            top: -2px; 
-            left: -2px; 
-            right: -2px; 
-            bottom: -2px;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
             background: linear-gradient(90deg, var(--glow-start, #00F0FF), var(--glow-end, #7000FF));
             border-radius: 0.75rem;
             z-index: -1;
             filter: blur(8px);
-            opacity: 0.7;
+            opacity: 0.5;
             transition: opacity 0.3s ease;
         }
-        
-        .neon-border:hover::after { 
-            opacity: 1; 
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.7), 0 0 25px rgba(112, 0, 255, 0.5);
-        }
-        
-        .feature-card { 
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            overflow: hidden;
-        }
-        
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 240, 255, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-        }
-        
-        .feature-card:hover::before {
-            opacity: 1;
-        }
-        
+        .neon-border:hover::after { opacity: 0.8; }
+        .feature-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .feature-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 240, 255, 0.2), 0 0 30px rgba(112, 0, 255, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 240, 255, 0.1);
         }
-        
         .testimonial-card {
             background: rgba(20, 26, 40, 0.7);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
         }
-        
-        .testimonial-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(112, 0, 255, 0.1) 0%, transparent 70%);
-            animation: hologram 8s ease-in-out infinite;
-            z-index: -1;
-        }
-        
-        .glow { 
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3); 
-            animation: glow-pulse 2s infinite;
-        }
-        
+        .glow { box-shadow: 0 0 20px rgba(0, 240, 255, 0.3); }
         .hero-pattern {
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 80% 60%, rgba(112, 0, 255, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 40% 80%, rgba(0, 240, 255, 0.03) 0%, transparent 30%);
+            background-image: radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.05) 0%, transparent 20%),
+                             radial-gradient(circle at 80% 60%, rgba(112, 0, 255, 0.05) 0%, transparent 20%);
         }
-        
-        .cyber-grid {
-            position: absolute;
+        .floating { animation: float 6s ease-in-out infinite; }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .pulse { animation: pulse 3s infinite; }
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        /* New Styles for Makeover */
+        .orb-gradient {
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.5) 0%, rgba(112, 0, 255, 0.5) 100%);
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+        }
+        .section-separator {
             width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px);
-            background-size: 40px 40px;
-            transform: perspective(500px) rotateX(60deg);
-            transform-origin: center;
-            z-index: -1;
-            opacity: 0.3;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        .icon-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .icon-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.2);
+        }
+        .card-glow {
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .card-glow:hover {
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
         }
         
-        .holographic {
-            position: relative;
+        /* Chatbot Styles */
+        #chat-bubble {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 4rem;
+            height: 4rem;
+            background: linear-gradient(90deg, #00F0FF, #7000FF);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+            transition: transform 0.3s ease;
+        }
+        #chat-bubble:hover {
+            transform: scale(1.1);
+        }
+        #chat-window {
+            position: fixed;
+            bottom: 7rem;
+            right: 2rem;
+            width: 90%;
+            max-width: 400px;
+            height: 70vh;
+            max-height: 600px;
+            background-color: #141A28;
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
             overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            pointer-events: none;
         }
-        
-        .holographic::before {
-            content: '';
-            position: absolute;
-            top: -100%;
-            left: -100%;
-            width: 300%;
-            height: 300%;
-            background: conic-gradient(
-                from 0deg,
-                transparent 0deg,
-                rgba(0, 240, 255, 0.1) 90deg,
-                transparent 180deg,
-                rgba(112, 0, 255, 0.1) 270deg,
-                transparent 360deg
-            );
-            animation: hologram 6s linear infinite;
-            z-index: -1;
+        #chat-window.open {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            pointer-events: auto;
         }
-        
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-            .hero-pattern {
-                padding-top: 6rem;
-            }
-            
-            .typing-effect {
-                font-size: 1rem;
-                white-space: normal;
-                border-right: none;
-                animation: none;
-            }
-            
-            .orbit-container {
-                width: 250px;
-                height: 250px;
-            }
-            
-            .flip-card {
-                height: 250px;
-            }
-            
-            /* Larger phone graphic for mobile */
-            .phone-graphic {
-                width: 100%;
-                max-width: 350px;
-                height: auto;
-            }
-            
-            /* Adjust chat bubble position for mobile */
-            #chat-bubble {
-                bottom: 1rem;
-                right: 1rem;
-                width: 3.5rem;
-                height: 3.5rem;
-            }
-            
-            #chat-window {
-                bottom: 5rem;
-                right: 1rem;
-                width: 95%;
-                max-width: 350px;
-            }
+        .chat-message {
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 0.5rem;
+            max-width: 80%;
+            line-height: 1.5;
+            word-wrap: break-word;
         }
-        
-        @media (max-width: 480px) {
-            .phone-graphic {
-                max-width: 300px;
-            }
-            
-            .orbit-container {
-                width: 200px;
-                height: 200px;
-            }
+        .user-message {
+            background: linear-gradient(90deg, #00F0FF, #7000FF);
+            color: #0B0F19;
+            align-self: flex-end;
+        }
+        .ai-message {
+            background-color: #2A3142;
+            color: white;
+            align-self: flex-start;
+        }
+        .ai-message a {
+            color: #00F0FF;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        .ai-message a:hover {
+            color: #7000FF;
+        }
+        .chat-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            align-self: flex-start;
+        }
+        .chat-button {
+            background-color: #2A3142;
+            border: 1px solid #00F0FF;
+            color: #00F0FF;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .chat-button:hover {
+            background-color: #00F0FF;
+            color: #141A28;
         }
     </style>
 </head>
 <body>
-    <!-- Particles Background -->
-    <div class="particles" id="particles"></div>
-    
-    <!-- Matrix Rain Effect -->
-    <div class="matrix-rain" id="matrix-rain"></div>
-    
-    <nav class="fixed w-full z-50 bg-primary/90 backdrop-blur-lg border-b border-white/10">
+    <nav id="navbar" class="fixed w-full z-50 bg-transparent transition-all duration-300">
         <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
                 <a href="index.html" class="flex items-center">
@@ -354,12 +227,11 @@
                 </a>
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="#features" class="nav-link text-white/80 hover:text-accent transition-colors">Features</a>
-                    <a href="#technology" class="nav-link text-white/80 hover:text-accent transition-colors">Technology</a>
-                    <a href="https://careers.syncflo.xyz" class="nav-link text-white/80 hover:text-accent transition-colors">Careers</a>
+                    <a href="#why-us" class="nav-link text-white/80 hover:text-accent transition-colors">Why Us</a>
                     <a href="#testimonials" class="nav-link text-white/80 hover:text-accent transition-colors">Testimonials</a>
                     <a href="#about" class="nav-link text-white/80 hover:text-accent transition-colors">About</a>
-                    <a href="waitlist.html" class="nav-link text-white/80 hover:text-accent transition-colors">Waitlist</a>
-                    <a href="contact.html" class="cyber-button bg-gradient-to-r from-accent to-accent2 text-primary font-semibold px-6 py-2 rounded-full hover:opacity-90 transition-opacity">Contact Us</a>
+					<a href="waitlist.html" class="nav-link text-white/80 hover:text-accent transition-colors">Waitlist</a>
+                    <a href="contact.html" class="bg-gradient-to-r from-accent to-accent2 text-primary font-semibold px-6 py-2 rounded-full hover:opacity-90 transition-opacity">Contact Us</a>
                 </div>
                 <div class="md:hidden">
                     <button id="menu-toggle" class="text-white">
@@ -373,119 +245,125 @@
         <div id="mobile-menu" class="hidden md:hidden bg-secondary border-t border-white/10">
             <div class="container mx-auto px-6 py-4 space-y-4">
                 <a href="#features" class="nav-link block text-white/80 hover:text-accent transition-colors">Features</a>
-                <a href="https://careers.syncflo.xyz" class="nav-link text-white/80 hover:text-accent transition-colors">Careers</a>
-                <a href="#technology" class="nav-link block text-white/80 hover:text-accent transition-colors">Technology</a>
+                <a href="#why-us" class="nav-link block text-white/80 hover:text-accent transition-colors">Why Us</a>
                 <a href="#testimonials" class="nav-link block text-white/80 hover:text-accent transition-colors">Testimonials</a>
                 <a href="#about" class="nav-link block text-white/80 hover:text-accent transition-colors">About</a>
-                <a href="contact.html" class="block cyber-button bg-gradient-to-r from-accent to-accent2 text-primary font-semibold px-6 py-2 rounded-full text-center hover:opacity-90 transition-opacity">Contact Us</a>
+                <a href="contact.html" class="block bg-gradient-to-r from-accent to-accent2 text-primary font-semibold px-6 py-2 rounded-full text-center hover:opacity-90 transition-opacity">Contact Us</a>
             </div>
         </div>
     </nav>
-    
-    <section id="home" class="hero-pattern min-h-screen flex items-center pt-24 pb-16 relative overflow-hidden parallax">
-        <!-- Cyber Grid Background -->
-        <div class="cyber-grid"></div>
-        
-        <!-- Morphing Background -->
-        <div class="morphing-bg"></div>
-        
-        <div class="container mx-auto px-6 relative z-10">
+
+    <section id="home" class="relative min-h-screen flex items-center pt-24 pb-16 bg-primary overflow-hidden">
+        <div class="absolute inset-0 z-0 hero-pattern" style="background-size: 15px 15px;">
+            <!-- Animated Orbs -->
+            <div id="orb1" class="absolute w-96 h-96 top-10 left-1/4 transform -translate-x-1/2 orb-gradient"></div>
+            <div id="orb2" class="absolute w-80 h-80 bottom-10 right-1/3 transform translate-x-1/2 orb-gradient"></div>
+        </div>
+        <div class="container mx-auto px-6 relative z-10 text-center md:text-left">
             <div class="flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 mb-12 md:mb-0" data-aos="fade-right">
                     <h1 class="text-4xl md:text-6xl font-bold font-display leading-tight mb-6">
-                        Automate Your Business With <span class="shimmer-text">Intelligent AI</span>
+                        Automate Your Business With <span class="gradient-text">Intelligent AI</span>
                     </h1>
-                    <p class="text-xl text-white/80 mb-8 max-w-lg typing-effect" data-aos="fade-down" data-aos-delay="100">
-                        Deploy powerful AI Chatbots for WhatsApp Automation, Instagram, and Voice Calls.
+                    <p class="text-xl text-white/80 mb-8 max-w-lg">
+                        Deploy powerful AI Chatbots for WhatsApp Automation, Instagram, and Voice Calls. Reduce hiring needs and simplify your business with our cutting-edge tools.
                     </p>
-                    <div class="hologram-display p-6 mb-8" data-aos="fade-down" data-aos-delay="150">
-                        <p class="text-lg text-accent font-display italic text-center">
-                            Built to Sell. Trained to Close.
-                        </p>
-                    </div>
-                    <div class="flex flex-col sm:flex-row gap-4" data-aos="fade-down" data-aos-delay="200">
-                        <a href="demo.html" class="cyber-button bg-gradient-to-r from-accent to-accent2 text-primary font-semibold px-8 py-3 rounded-full text-center hover:opacity-90 transition-opacity">
+                    <p class="text-lg text-accent font-display italic my-8">
+                        Built to Sell. Trained to Close.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                        <a href="demo.html" class="bg-gradient-to-r from-accent to-accent2 text-primary font-semibold px-8 py-3 rounded-full text-center hover:opacity-90 transition-opacity">
                             Book for Demo
                         </a>
-                        <a href="#features" class="nav-link cyber-button border border-white/20 bg-white/5 backdrop-blur-sm text-white font-semibold px-8 py-3 rounded-full text-center hover:bg-white/10 transition-colors">
-                            View Features
+                        <a href="#features" class="nav-link border border-white/20 bg-white/5 backdrop-blur-sm text-white font-semibold px-8 py-3 rounded-full text-center hover:bg-white/10 transition-colors">
+                            View Products
                         </a>
                     </div>
                 </div>
-                <div class="md:w-1/2 relative" data-aos="fade-left" data-aos-delay="100">
-                    <div class="orbit-container">
-                        <div class="orbit-item"></div>
-                        <div class="orbit-item"></div>
-                        <div class="orbit-item"></div>
-                        <div class="relative floating animation-float-slow phone-graphic">
-                            <div class="holographic p-8 rounded-xl">
-                                <svg class="w-full h-auto" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-                                    <defs>
-                                        <linearGradient id="phoneGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#141A28" /><stop offset="100%" stop-color="#0B0F19" /></linearGradient>
-                                        <linearGradient id="screenGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1A2133" /><stop offset="100%" stop-color="#141A28" /></linearGradient>
-                                        <linearGradient id="botGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00F0FF" /><stop offset="100%" stop-color="#7000FF" /></linearGradient>
-                                        <filter id="glow"><feGaussianBlur stdDeviation="5" result="blur" /><feComposite in="SourceGraphic" in2="blur" operator="over" /></filter>
-                                    </defs>
-                                    <rect x="100" y="50" width="200" height="300" rx="20" fill="url(#phoneGrad)" stroke="#2A3142" stroke-width="2" />
-                                    <rect x="110" y="70" width="180" height="260" rx="10" fill="url(#screenGrad)" />
-                                    <rect x="120" y="80" width="160" height="30" rx="5" fill="#0B0F19" />
-                                    <text x="140" y="100" fill="white" font-family="Inter, sans-serif" font-size="12">SyncFlo Ai Agent</text>
-                                    <circle cx="130" cy="95" r="5" fill="#00F0FF" />
-                                    <rect x="120" y="120" width="100" height="30" rx="10" fill="#1E2A45" />
-                                    <text x="130" y="140" fill="white" font-family="Inter, sans-serif" font-size="10">Hello! How can I help?</text>
-                                    <rect x="180" y="160" width="100" height="30" rx="10" fill="#2A3A5A" />
-                                    <text x="190" y="180" fill="white" font-family="Inter, sans-serif" font-size="10">Need to automate replies</text>
-                                    <rect x="120" y="200" width="120" height="40" rx="10" fill="#1E2A45" />
-                                    <text x="130" y="220" fill="white" font-family="Inter, sans-serif" font-size="10">I can set up automated</text>
-                                    <text x="130" y="235" fill="white" font-family="Inter, sans-serif" font-size="10">responses for you!</text>
-                                    <circle cx="200" cy="280" r="25" fill="url(#botGrad)" filter="url(#glow)" />
-                                    <circle cx="190" cy="275" r="5" fill="white" /><circle cx="210" cy="275" r="5" fill="white" />
-                                    <path d="M185 290 C195 300, 205 300, 215 290" stroke="white" stroke-width="2" fill="none" />
-                                    <circle cx="250" cy="100" r="15" fill="none" stroke="#7000FF" stroke-width="2" opacity="0.7" class="pulse" />
-                                    <circle cx="270" cy="130" r="8" fill="#00F0FF" opacity="0.5" class="pulse" />
-                                    <circle cx="130" cy="250" r="10" fill="none" stroke="#00F0FF" stroke-width="2" opacity="0.7" class="pulse" />
-                                    <circle cx="150" cy="270" r="5" fill="#7000FF" opacity="0.5" class="pulse" />
-                                </svg>
-                            </div>
-                        </div>
+                <div class="md:w-1/2 relative flex justify-center items-center" data-aos="fade-left">
+                    <div class="relative floating">
+                        <svg class="w-full h-auto" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="phoneGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#141A28" /><stop offset="100%" stop-color="#0B0F19" /></linearGradient>
+                                <linearGradient id="screenGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1A2133" /><stop offset="100%" stop-color="#141A28" /></linearGradient>
+                                <linearGradient id="botGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00F0FF" /><stop offset="100%" stop-color="#7000FF" /></linearGradient>
+                                <filter id="glow"><feGaussianBlur stdDeviation="5" result="blur" /><feComposite in="SourceGraphic" in2="blur" operator="over" /></filter>
+                            </defs>
+                            <rect x="100" y="50" width="200" height="300" rx="20" fill="url(#phoneGrad)" stroke="#2A3142" stroke-width="2" />
+                            <rect x="110" y="70" width="180" height="260" rx="10" fill="url(#screenGrad)" />
+                            <rect x="120" y="80" width="160" height="30" rx="5" fill="#0B0F19" />
+                            <text x="140" y="100" fill="white" font-family="Inter, sans-serif" font-size="12">SyncFlo Ai Agent</text>
+                            <circle cx="130" cy="95" r="5" fill="#00F0FF" />
+                            <rect x="120" y="120" width="100" height="30" rx="10" fill="#1E2A45" />
+                            <text x="130" y="140" fill="white" font-family="Inter, sans-serif" font-size="10">Hello! How can I help?</text>
+                            <rect x="180" y="160" width="100" height="30" rx="10" fill="#2A3A5A" />
+                            <text x="190" y="180" fill="white" font-family="Inter, sans-serif" font-size="10">Need to automate replies</text>
+                            <rect x="120" y="200" width="120" height="40" rx="10" fill="#1E2A45" />
+                            <text x="130" y="220" fill="white" font-family="Inter, sans-serif" font-size="10">I can set up automated</text>
+                            <text x="130" y="235" fill="white" font-family="Inter, sans-serif" font-size="10">responses for you!</text>
+                            <circle cx="200" cy="280" r="25" fill="url(#botGrad)" filter="url(#glow)" />
+                            <circle cx="190" cy="275" r="5" fill="white" /><circle cx="210" cy="275" r="5" fill="white" />
+                            <path d="M185 290 C195 300, 205 300, 215 290" stroke="white" stroke-width="2" fill="none" />
+                            <circle cx="250" cy="100" r="15" fill="none" stroke="#7000FF" stroke-width="2" opacity="0.7" class="pulse" />
+                            <circle cx="270" cy="130" r="8" fill="#00F0FF" opacity="0.5" class="pulse" />
+                            <circle cx="130" cy="250" r="10" fill="none" stroke="#00F0FF" stroke-width="2" opacity="0.7" class="pulse" />
+                            <circle cx="150" cy="270" r="5" fill="#7000FF" opacity="0.5" class="pulse" />
+                        </svg>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <section id="trust-metrics" class="py-20 bg-secondary relative overflow-hidden">
-        <div class="container mx-auto px-6 relative z-10">
+
+    <!-- Trust Metrics Section - Dark Background -->
+    <section id="trust-metrics" class="py-20 bg-primary">
+        <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-                <div class="cyber-card p-6 scroll-reveal" data-aos="fade-up" data-aos-delay="100">
-                    <p class="text-4xl md:text-5xl font-bold font-display gradient-text">95%</p>
-                    <p class="text-white/70 mt-2">Automation Potential</p>
-                </div>
-                <div class="cyber-card p-6 scroll-reveal" data-aos="fade-up" data-aos-delay="200">
-                    <p class="text-4xl md:text-5xl font-bold font-display gradient-text">&lt;1s</p>
-                    <p class="text-white/70 mt-2">AI Response Time</p>
-                </div>
-                <div class="cyber-card p-6 scroll-reveal" data-aos="fade-up" data-aos-delay="300">
-                    <p class="text-4xl md:text-5xl font-bold font-display gradient-text">1,000+</p>
-                    <p class="text-white/70 mt-2">Development Hours</p>
-                </div>
-                <div class="cyber-card p-6 scroll-reveal" data-aos="fade-up" data-aos-delay="400">
-                    <p class="text-4xl md:text-5xl font-bold font-display gradient-text">24/7</p>
-                    <p class="text-white/70 mt-2">Agent Availability</p>
-                </div>
+                <div data-aos="fade-up" data-aos-delay="100"><p class="text-4xl md:text-5xl font-bold font-display gradient-text">95%</p><p class="text-white/70 mt-2">Automation Potential</p></div>
+                <div data-aos="fade-up" data-aos-delay="200"><p class="text-4xl md:text-5xl font-bold font-display gradient-text">&lt;1s</p><p class="text-white/70 mt-2">AI Response Time</p></div>
+                <div data-aos="fade-up" data-aos-delay="300"><p class="text-4xl md:text-5xl font-bold font-display gradient-text">1,000+</p><p class="text-white/70 mt-2">Development Hours</p></div>
+                <div data-aos="fade-up" data-aos-delay="400"><p class="text-4xl md:text-5xl font-bold font-display gradient-text">24/7</p><p class="text-white/70 mt-2">Agent Availability</p></div>
             </div>
         </div>
     </section>
     
-    <section id="why-us" class="py-20 bg-primary relative overflow-hidden">
-        <div class="cyber-grid"></div>
-        <div class="container mx-auto px-6 relative z-10">
+    <div class="section-separator"></div>
+
+    <!-- Features Section (now contains products) - Secondary Background -->
+    <section id="features" class="py-20 bg-secondary">
+        <div class="container mx-auto px-6">
             <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">Why Choose <span class="shimmer-text">SyncFlo Ai</span>?</h2>
+                <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">A Suite of Powerful <span class="gradient-text">AI Tools</span></h2>
+                <p class="text-white/70 max-w-2xl mx-auto">Explore our cutting-edge AI products designed to transform your business operations.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-primary/80 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 neon-border" style="--glow-start: #00FF87; --glow-end: #00A3FF;" data-aos="fade-up" data-aos-delay="100">
+                    <div class="p-8 flex flex-col h-full">
+                        <div class="flex-grow"><div class="flex items-center justify-between mb-6"><h3 class="text-2xl font-bold font-display">WhatsApp Business AI</h3><div class="bg-green_accent/20 text-green_accent px-3 py-1 rounded-full text-sm font-medium">Popular</div></div><p class="text-white/70 mb-6">Automate customer interactions, sales processes, and support on WhatsApp with our intelligent AI assistant.</p></div>
+                        <div class="flex justify-center items-center mt-auto"><div><a href="whatsapp.html" class="bg-white/10 border border-white/20 text-white font-semibold px-6 py-2 rounded-full hover:bg-white/20 transition-colors">Learn More</a></div></div>
+                    </div>
+                </div>
+                <div class="bg-primary/80 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 neon-border" style="--glow-start: #FF8C00; --glow-end: #FF4500;" data-aos="fade-up" data-aos-delay="400">
+                    <div class="p-8 flex flex-col h-full">
+                         <div class="flex-grow"><div class="flex items-center justify-between mb-6"><h3 class="text-2xl font-bold font-display">AI Voice Sales Agent</h3><div class="bg-sales_red/20 text-sales_orange px-3 py-1 rounded-full text-sm font-medium">Cutting Edge</div></div><p class="text-white/70 mb-6">Handle inbound and outbound sales calls 24/7 with a human-like voice agent that can qualify leads and book appointments.</p></div>
+                        <div class="flex justify-center items-center mt-auto"><div><a href="voice.html" class="bg-gradient-to-r from-sales_orange to-sales_red text-white font-semibold px-6 py-2 rounded-full hover:opacity-90 transition-opacity">Learn More</a></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-separator"></div>
+
+    <!-- Why Choose Us Section - Primary Background -->
+    <section id="why-us" class="py-20 bg-primary">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">Why Choose <span class="gradient-text">SyncFlo Ai</span>?</h2>
                 <p class="text-white/70 max-w-2xl mx-auto">Discover the key advantages that set our AI solutions apart from the rest.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="cyber-card p-8 text-center scroll-reveal" data-aos="fade-up" data-aos-delay="100">
+                <div class="bg-secondary/80 backdrop-blur-sm p-8 rounded-xl border border-white/10 text-center icon-container" data-aos="fade-up" data-aos-delay="100">
                     <div class="w-16 h-16 bg-accent/10 rounded-full inline-flex items-center justify-center mb-6">
                         <svg class="h-8 w-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -494,7 +372,7 @@
                     <h3 class="text-xl font-bold font-display mb-3">Unmatched Reliability</h3>
                     <p class="text-white/70">Our agents are built on a robust, scalable infrastructure, ensuring 99.9% uptime for your business operations.</p>
                 </div>
-                <div class="cyber-card p-8 text-center scroll-reveal" data-aos="fade-up" data-aos-delay="200">
+                <div class="bg-secondary/80 backdrop-blur-sm p-8 rounded-xl border border-white/10 text-center icon-container" data-aos="fade-up" data-aos-delay="200">
                     <div class="w-16 h-16 bg-green_accent/10 rounded-full inline-flex items-center justify-center mb-6">
                         <svg class="h-8 w-8 text-green_accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M9 12l2 2l4-4m6 2a9 9 0 11-18 0a9 9 0 0118 0z" />
@@ -503,7 +381,7 @@
                     <h3 class="text-xl font-bold font-display mb-3">Simple Integration</h3>
                     <p class="text-white/70">Seamlessly connect our AI with your existing CRM, social media platforms, and communication channels.</p>
                 </div>
-                <div class="cyber-card p-8 text-center scroll-reveal" data-aos="fade-up" data-aos-delay="300">
+                <div class="bg-secondary/80 backdrop-blur-sm p-8 rounded-xl border border-white/10 text-center icon-container" data-aos="fade-up" data-aos-delay="300">
                     <div class="w-16 h-16 bg-sales_orange/10 rounded-full inline-flex items-center justify-center mb-6">
                         <svg class="h-8 w-8 text-sales_orange" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -516,86 +394,27 @@
         </div>
     </section>
     
-    <section id="features" class="py-20 bg-secondary relative overflow-hidden">
-        <div class="container mx-auto px-6 relative z-10">
+    <div class="section-separator"></div>
+
+    <!-- How It Works Section - Primary Background -->
+    <section id="how-it-works" class="py-20 bg-secondary">
+        <div class="container mx-auto px-6">
             <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">A Suite of Powerful <span class="shimmer-text">AI Tools</span></h2>
-                <p class="text-white/70 max-w-2xl mx-auto">Our AI-powered tools help you automate repetitive tasks, enhance customer engagement, and scale your business efficiently.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <div class="flip-card" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front cyber-card p-8">
-                            <div class="w-16 h-16 bg-green_accent/10 rounded-lg flex items-center justify-center mb-6">
-                                <svg class="h-8 w-8 text-green_accent"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  
-                                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-bold font-display mb-3">WhatsApp Automation</h3>
-                            <p class="text-white/70 mb-4">Automate customer inquiries, order processing, and follow-ups with our intelligent WhatsApp bots.</p>
-                            <p class="text-accent font-medium">Hover to learn more →</p>
-                        </div>
-                        <div class="flip-card-back cyber-card p-8 bg-gradient-to-br from-green_accent/10 to-transparent">
-                            <h3 class="text-xl font-bold font-display mb-3">WhatsApp Automation</h3>
-                            <ul class="text-white/70 space-y-2">
-                                <li>• Automated customer responses</li>
-                                <li>• Order processing & tracking</li>
-                                <li>• Lead qualification</li>
-                                <li>• Appointment scheduling</li>
-                                <li>• Personalized marketing</li>
-                            </ul>
-                            <a href="whatsapp.html" class="mt-4 inline-block bg-green_accent text-primary font-semibold px-4 py-2 rounded-full text-sm">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front cyber-card p-8">
-                            <div class="w-16 h-16 bg-sales_red/10 rounded-lg flex items-center justify-center mb-6">
-                                <svg class="h-8 w-8 text-sales_orange"  fill="none" viewBox="0 0 24 24" stroke="currentColor"> 
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-bold font-display mb-3">AI Voice Sales Agent</h3>
-                            <p class="text-white/70 mb-4">Handle inbound/outbound calls 24/7 with a human-like voice agent that qualifies leads and books appointments.</p>
-                            <p class="text-accent font-medium">Hover to learn more →</p>
-                        </div>
-                        <div class="flip-card-back cyber-card p-8 bg-gradient-to-br from-sales_orange/10 to-transparent">
-                            <h3 class="text-xl font-bold font-display mb-3">AI Voice Sales Agent</h3>
-                            <ul class="text-white/70 space-y-2">
-                                <li>• Natural conversation flow</li>
-                                <li>• Lead qualification</li>
-                                <li>• Appointment booking</li>
-                                <li>• Call analytics & insights</li>
-                                <li>• Multi-language support</li>
-                            </ul>
-                            <a href="voice.html" class="mt-4 inline-block bg-gradient-to-r from-sales_orange to-sales_red text-white font-semibold px-4 py-2 rounded-full text-sm">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section id="how-it-works" class="py-20 bg-primary relative overflow-hidden">
-        <div class="cyber-grid"></div>
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">How It <span class="shimmer-text">Works</span></h2>
+                <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">How It <span class="gradient-text">Works</span></h2>
                 <p class="text-white/70 max-w-2xl mx-auto">Getting started with SyncFlo Ai is a simple three-step process.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="cyber-card p-8 text-center scroll-reveal" data-aos="fade-up" data-aos-delay="100">
+                <div class="bg-primary/80 backdrop-blur-sm p-8 rounded-xl border border-white/10 text-center card-glow" data-aos="fade-up" data-aos-delay="100">
                     <div class="w-16 h-16 bg-white/10 text-white rounded-full inline-flex items-center justify-center font-bold text-3xl mb-6">1</div>
                     <h3 class="text-xl font-bold font-display mb-3">Connect</h3>
                     <p class="text-white/70">Connect your preferred channels like WhatsApp or your CRM to our platform with a few clicks.</p>
                 </div>
-                <div class="cyber-card p-8 text-center scroll-reveal" data-aos="fade-up" data-aos-delay="200">
+                <div class="bg-primary/80 backdrop-blur-sm p-8 rounded-xl border border-white/10 text-center card-glow" data-aos="fade-up" data-aos-delay="200">
                     <div class="w-16 h-16 bg-white/10 text-white rounded-full inline-flex items-center justify-center font-bold text-3xl mb-6">2</div>
                     <h3 class="text-xl font-bold font-display mb-3">Customize</h3>
                     <p class="text-white/70">Fine-tune the AI agent's personality, knowledge base, and specific actions to align with your brand.</p>
                 </div>
-                <div class="cyber-card p-8 text-center scroll-reveal" data-aos="fade-up" data-aos-delay="300">
+                <div class="bg-primary/80 backdrop-blur-sm p-8 rounded-xl border border-white/10 text-center card-glow" data-aos="fade-up" data-aos-delay="300">
                     <div class="w-16 h-16 bg-white/10 text-white rounded-full inline-flex items-center justify-center font-bold text-3xl mb-6">3</div>
                     <h3 class="text-xl font-bold font-display mb-3">Automate</h3>
                     <p class="text-white/70">Launch your AI agent and watch it handle tasks 24/7, providing real-time value and efficiency.</p>
@@ -603,73 +422,44 @@
             </div>
         </div>
     </section>
-    
-    <section id="technology" class="py-20 bg-secondary relative overflow-hidden parallax">
-        <div class="cyber-grid"></div>
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">Advanced <span class="shimmer-text">AI Technology</span></h2>
-                <p class="text-white/70 max-w-2xl mx-auto">Discover the cutting-edge technology powering our intelligent automation solutions.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="cyber-card p-6 text-center scroll-reveal" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="w-16 h-16 bg-accent/10 rounded-full inline-flex items-center justify-center mb-4 mx-auto">
-                        <svg class="h-8 w-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-bold font-display mb-2">Neural Networks</h3>
-                    <p class="text-white/70 text-sm">Advanced deep learning models that understand context and nuance in conversations.</p>
-                </div>
-                <div class="cyber-card p-6 text-center scroll-reveal" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="w-16 h-16 bg-accent2/10 rounded-full inline-flex items-center justify-center mb-4 mx-auto">
-                        <svg class="h-8 w-8 text-accent2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-bold font-display mb-2">NLP Processing</h3>
-                    <p class="text-white/70 text-sm">Natural Language Processing that understands intent, sentiment, and context.</p>
-                </div>
-                <div class="cyber-card p-6 text-center scroll-reveal" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="w-16 h-16 bg-green_accent/10 rounded-full inline-flex items-center justify-center mb-4 mx-auto">
-                        <svg class="h-8 w-8 text-green_accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-bold font-display mb-2">Cloud Infrastructure</h3>
-                    <p class="text-white/70 text-sm">Scalable, secure cloud architecture ensuring 99.9% uptime and reliability.</p>
-                </div>
-                <div class="cyber-card p-6 text-center scroll-reveal" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="w-16 h-16 bg-sales_orange/10 rounded-full inline-flex items-center justify-center mb-4 mx-auto">
-                        <svg class="h-8 w-8 text-sales_orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-bold font-display mb-2">Security First</h3>
-                    <p class="text-white/70 text-sm">Enterprise-grade security with end-to-end encryption and compliance standards.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section id="about" class="py-20 bg-primary relative overflow-hidden">
-        <div class="cyber-grid"></div>
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="flex flex-col md:flex-row items-center">
-                 <div data-aos="fade-right">
-                    <h2 class="text-3xl md:text-4xl font-bold font-display mb-6">About <span class="shimmer-text">SyncFlo Ai</span></h2>
-                    <p class="text-white/80 mb-6 max-w-4xl">Founded with a vision to democratize AI technology, SyncFlo Ai is transforming how businesses operate in the digital age. With over a decade of combined experience in AI and automation, our team is dedicated to building powerful, accessible tools.</p>
-                    <p class="text-white/80 mb-8 max-w-4xl">Our mission is to help small and medium-sized businesses compete with larger corporations by providing them with cutting-edge AI agents that were previously only available to enterprises with massive budgets.</p>
+    <div class="section-separator"></div>
+
+    <!-- New FAQ Section -->
+    <section id="faq" class="py-20 bg-primary">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">Frequently Asked <span class="gradient-text">Questions</span></h2>
+                <p class="text-white/70 max-w-2xl mx-auto">Get quick answers to the most common questions about SyncFlo Ai.</p>
+            </div>
+            <div class="max-w-3xl mx-auto space-y-6">
+                <!-- FAQ Item 1 -->
+                <div class="bg-secondary/80 backdrop-blur-sm rounded-xl p-6 border border-white/10" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-bold font-display mb-2">What is SyncFlo Ai?</h3>
+                    <p class="text-white/70">SyncFlo Ai is a business automation platform that uses intelligent AI chatbots for communication channels like WhatsApp, Instagram, and voice calls to handle tasks, reduce operational costs, and streamline workflows.</p>
+                </div>
+                <!-- FAQ Item 2 -->
+                <div class="bg-secondary/80 backdrop-blur-sm rounded-xl p-6 border border-white/10" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-xl font-bold font-display mb-2">How does the AI Voice Sales Agent work?</h3>
+                    <p class="text-white/70">Our AI Voice Sales Agent uses a human-like voice to handle inbound and outbound calls 24/7. It is trained to qualify leads, book appointments, and provide information, acting as a tireless member of your sales team.</p>
+                </div>
+                <!-- FAQ Item 3 -->
+                <div class="bg-secondary/80 backdrop-blur-sm rounded-xl p-6 border border-white/10" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-xl font-bold font-display mb-2">Can SyncFlo Ai integrate with my existing tools?</h3>
+                    <p class="text-white/70">Yes, our platform is designed for seamless integration. You can connect it with your CRM, social media accounts, and other business tools to create a unified and automated ecosystem.</p>
                 </div>
             </div>
         </div>
     </section>
-    
+    <!-- End New FAQ Section -->
+
+    <div class="section-separator"></div>
+
     <!-- Testimonials Section with Trustpilot Widget -->
-    <section id="testimonials" class="py-20 bg-secondary relative overflow-hidden">
-        <div class="container mx-auto px-6 relative z-10">
+    <section id="testimonials" class="py-20 bg-secondary">
+        <div class="container mx-auto px-6">
             <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">What Our <span class="shimmer-text">Customers Say</span></h2>
+                <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">What Our <span class="gradient-text">Customers Say</span></h2>
                 <p class="text-white/70 max-w-2xl mx-auto">See the positive impact SyncFlo Ai has had on businesses like yours.</p>
             </div>
             <!-- TrustBox widget - Review Collector -->
@@ -679,23 +469,26 @@
             <!-- End TrustBox widget -->
         </div>
     </section>
-    
+    <!-- End Testimonials Section -->
+
+    <div class="section-separator"></div>
+
     <!-- New Call to Action Section -->
-    <section id="cta" class="py-20 bg-primary relative overflow-hidden">
-        <div class="cyber-grid"></div>
-        <div class="container mx-auto px-6 text-center relative z-10">
-            <div class="cyber-card p-8 md:p-12" data-aos="fade-up">
-                <h2 class="text-3xl md:text-5xl font-bold font-display mb-4 leading-tight">Ready to <span class="shimmer-text">Automate Your Business</span>?</h2>
+    <section id="cta" class="py-20 bg-primary">
+        <div class="container mx-auto px-6 text-center">
+            <div class="bg-secondary/80 backdrop-blur-sm p-8 md:p-12 rounded-xl border border-white/10 card-glow" data-aos="fade-up">
+                <h2 class="text-3xl md:text-5xl font-bold font-display mb-4 leading-tight">Ready to <span class="gradient-text">Automate Your Business</span>?</h2>
                 <p class="text-white/70 max-w-2xl mx-auto mb-8">Join the future of business automation. Our AI agents are ready to work for you, 24/7.</p>
-                <a href="demo.html" class="inline-block cyber-button bg-gradient-to-r from-accent to-accent2 text-primary font-semibold px-8 py-4 rounded-full text-center hover:opacity-90 transition-opacity text-lg">
+                <a href="demo.html" class="inline-block bg-gradient-to-r from-accent to-accent2 text-primary font-semibold px-8 py-4 rounded-full text-center hover:opacity-90 transition-opacity text-lg">
                     Book a Free Demo Today
                 </a>
             </div>
         </div>
     </section>
-    
-    <footer class="bg-secondary border-t border-white/10 py-12 relative overflow-hidden" data-aos="fade-up">
-        <div class="container mx-auto px-6 text-center text-white/70 relative z-10">
+    <!-- End Call to Action Section -->
+
+    <footer class="bg-secondary border-t border-white/10 py-12" data-aos="fade-up">
+        <div class="container mx-auto px-6 text-center text-white/70">
             <div class="flex justify-center space-x-6 mb-6">
                 <a href="data-processing.html" class="hover:text-accent transition-colors">Data Processing</a>
                 <a href="terms.html" class="hover:text-accent transition-colors">Terms of Service</a>
@@ -704,13 +497,14 @@
             <p class="text-xs text-white/50">&copy; 2025 SyncFlo Ai. All Rights Reserved.</p>
         </div>
     </footer>
-    
+
     <!-- Chatbot HTML -->
     <div id="chat-bubble">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.02-3.11A7.002 7.002 0 012 10c0-3.866, 3.582-7, 8-7s8, 3.134, 8, 7zM4.416, 14.65A6.986, 6.986, 0, 0, 0, 10, 16c3.309, 0, 6-2.691, 6-6s-2.691-6-6-6-6, 2.691-6, 6c0, 1.562.602, 3.002, 1.626, 4.118L4.416, 14.65z" clip-rule="evenodd" />
         </svg>
     </div>
+
     <div id="chat-window" class="">
         <div class="p-4 bg-secondary border-b border-white/10 flex justify-between items-center">
             <h3 class="font-display font-bold text-lg"><span class="gradient-text">SyncFlo</span> Ai Assistant</h3>
@@ -746,33 +540,31 @@
             once: true,
         });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // Get elements
-            const nav = document.getElementById('navbar');
-            const heroSection = document.getElementById('home');
-            const orb1 = document.getElementById('orb1');
-            const orb2 = document.getElementById('orb2');
+        // Get elements
+        const nav = document.getElementById('navbar');
+        const heroSection = document.getElementById('home');
+        const orb1 = document.getElementById('orb1');
+        const orb2 = document.getElementById('orb2');
 
-            // Nav and Parallax on Scroll
-            window.addEventListener('scroll', () => {
-                const scrollY = window.scrollY;
-                const heroHeight = heroSection.offsetHeight;
+        // Nav and Parallax on Scroll
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const heroHeight = heroSection.offsetHeight;
 
-                // Nav bar change
-                if (scrollY > heroHeight - nav.offsetHeight) {
-                    nav.classList.add('bg-primary/80', 'backdrop-blur-lg', 'border-b', 'border-white/10');
-                } else {
-                    nav.classList.remove('bg-primary/80', 'backdrop-blur-lg', 'border-b', 'border-white/10');
-                }
+            // Nav bar change
+            if (scrollY > heroHeight - nav.offsetHeight) {
+                nav.classList.add('bg-primary/80', 'backdrop-blur-lg', 'border-b', 'border-white/10');
+            } else {
+                nav.classList.remove('bg-primary/80', 'backdrop-blur-lg', 'border-b', 'border-white/10');
+            }
 
-                // Parallax effect on orbs
-                if (orb1) {
-                    orb1.style.transform = `translateY(${scrollY * 0.3}px) scale(1.2)`;
-                }
-                if (orb2) {
-                    orb2.style.transform = `translateY(${scrollY * -0.2}px) scale(1.2)`;
-                }
-            });
+            // Parallax effect on orbs
+            if (orb1) {
+                orb1.style.transform = `translateY(${scrollY * 0.3}px) scale(1.2)`;
+            }
+            if (orb2) {
+                orb2.style.transform = `translateY(${scrollY * -0.2}px) scale(1.2)`;
+            }
         });
 
         document.getElementById('menu-toggle').addEventListener('click', function() {
@@ -787,120 +579,9 @@
                  }
             });
         });
-        
-        // Particle background effect
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 30;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // Random size
-                const size = Math.random() * 5 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                // Random position
-                const posX = Math.random() * 100;
-                particle.style.left = `${posX}%`;
-                
-                // Random animation duration
-                const duration = Math.random() * 10 + 10;
-                particle.style.animationDuration = `${duration}s`;
-                
-                // Random delay
-                const delay = Math.random() * 10;
-                particle.style.animationDelay = `${delay}s`;
-                
-                particlesContainer.appendChild(particle);
-            }
-        }
-        
-        createParticles();
-        
-        // Matrix rain effect
-        function createMatrixRain() {
-            const matrixContainer = document.getElementById('matrix-rain');
-            const columnCount = 20;
-            
-            for (let i = 0; i < columnCount; i++) {
-                const column = document.createElement('div');
-                column.classList.add('matrix-column');
-                
-                // Random position
-                const posX = Math.random() * 100;
-                column.style.left = `${posX}%`;
-                
-                // Random animation duration
-                const duration = Math.random() * 10 + 5;
-                column.style.animationDuration = `${duration}s`;
-                
-                // Random delay
-                const delay = Math.random() * 10;
-                column.style.animationDelay = `${delay}s`;
-                
-                // Random characters
-                const characters = '01';
-                let text = '';
-                const charCount = Math.floor(Math.random() * 20) + 10;
-                for (let j = 0; j < charCount; j++) {
-                    text += characters.charAt(Math.floor(Math.random() * characters.length)) + '<br>';
-                }
-                column.innerHTML = text;
-                
-                matrixContainer.appendChild(column);
-            }
-        }
-        
-        createMatrixRain();
-        
-        // Mouse tracking for interactive cards
-        document.querySelectorAll('.feature-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-            });
-        });
-        
-        // Scroll reveal animations
-        function revealOnScroll() {
-            const reveals = document.querySelectorAll('.scroll-reveal');
-            
-            reveals.forEach(element => {
-                const windowHeight = window.innerHeight;
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < windowHeight - elementVisible) {
-                    element.classList.add('active');
-                }
-            });
-        }
-        
-        window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll(); // Initial check
-        
-        // Parallax effect
-        function parallaxEffect() {
-            const parallaxElements = document.querySelectorAll('.parallax');
-            
-            parallaxElements.forEach(element => {
-                const scrollPosition = window.pageYOffset;
-                const speed = 0.5;
-                
-                element.style.transform = `translateY(${scrollPosition * speed}px)`;
-            });
-        }
-        
-        window.addEventListener('scroll', parallaxEffect);
-        
+
         // --- Chatbot Scripts ---
+
         const chatBubble = document.getElementById('chat-bubble');
         const chatWindow = document.getElementById('chat-window');
         const closeChat = document.getElementById('close-chat');
@@ -913,6 +594,7 @@
         const apiKey = "AIzaSyDftfcS4AQNPYo3Q2joZmYikWB4vpO_SfI"; 
 
         // --- Function Calling Setup ---
+
         // 1. Define the tools (our JavaScript functions)
         const tools = {
             redirectToCalendly(name, email) {
@@ -928,6 +610,7 @@
                 return `Successfully opened ${url}`;
             }
         };
+
         // 2. Define the tools' schema for the AI
         const toolDefinitions = [{
             "functionDeclarations": [{

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join the Waitlist - SyncFlo Ai</title>
+    
     <!-- Favicon links -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" onerror="this.onerror=null;this.src='https://placehold.co/180x180/0B0F19/FFFFFF?text=S';">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" onerror="this.onerror=null;this.src='https://placehold.co/32x32/0B0F19/FFFFFF?text=S';">
@@ -78,48 +79,6 @@
             opacity: 1;
             margin-top: 1.5rem; /* Same as space-y-6 */
         }
-
-        /* --- Crazy Button Styles --- */
-        .crazy-button-container {
-            position: relative;
-            z-index: 1;
-        }
-        .crazy-button {
-            position: relative;
-            overflow: hidden;
-            background: #101018; /* Button background color */
-            transition: color 0.4s ease, background 0.4s ease;
-            z-index: 1;
-        }
-        .crazy-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 200%;
-            padding-bottom: 200%;
-            background: conic-gradient(from 0deg, #00F0FF, #7000FF, #00F0FF);
-            transform: translate(-50%, -50%);
-            animation: rotate 4s linear infinite;
-            transition: opacity 0.4s ease;
-            z-index: -1;
-        }
-        .crazy-button:hover {
-            color: white;
-            background: transparent;
-        }
-        @keyframes rotate {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-        .particle {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0;
-        }
-
     </style>
 </head>
 <body class="antialiased hero-pattern">
@@ -177,9 +136,9 @@
                 </div>
                 
                 <!-- Waitlist Form -->
-                <form id="waitlist-form" class="space-y-6" action="https://65f84df01ef9.ngrok-free.app/webhook-test/waitlist" method="POST">
+                <form id="waitlist-form" class="space-y-6" action="https://473808622771.ngrok-free.app/webhook-test/waitlist" method="POST">
                     <input type="hidden" name="access_key" value="d10b4fbd-f7aa-419b-86f2-b6dfd9b9ae4d">
-                    <input type="hidden" name="subject" value="New Submission in Waitlist from Crazy Button Form">
+                    <input type="hidden" name="subject" value="New Submission in Waitlist">
                     
                     <!-- Form Fields -->
                     <div><input type="text" id="name" name="name" placeholder="Full Name" required class="w-full px-5 py-3.5 rounded-lg bg-primary/60 border border-white/10 text-white placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-300"></div>
@@ -205,8 +164,8 @@
                     </div>
                     
                     <!-- Submit Button -->
-                    <div class="crazy-button-container pt-2">
-                        <button id="submit-button" type="submit" class="crazy-button w-full text-accent font-bold text-lg px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105">
+                    <div class="pt-2">
+                        <button id="submit-button" type="submit" class="w-full bg-gradient-to-r from-accent to-accent2 text-primary font-bold text-lg px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 hover:opacity-90">
                             Get Early Access
                         </button>
                     </div>
@@ -289,39 +248,6 @@
                 arrow.classList.remove('rotate-180');
             }
         });
-
-        const submitButton = document.getElementById('submit-button');
-        submitButton.addEventListener('click', (e) => {
-            const rect = submitButton.getBoundingClientRect();
-            for (let i = 0; i < 30; i++) {
-                createParticle(rect.left + rect.width / 2, rect.top + rect.height / 2);
-            }
-        });
-
-        function createParticle(x, y) {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            document.body.appendChild(particle);
-
-            const size = Math.floor(Math.random() * 4 + 2);
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-            
-            const destinationX = x + (Math.random() - 0.5) * 2 * 100;
-            const destinationY = y + (Math.random() - 0.5) * 2 * 100;
-
-            const animation = particle.animate([
-                { transform: `translate(${x - size / 2}px, ${y - size / 2}px)`, opacity: 1 },
-                { transform: `translate(${destinationX}px, ${destinationY}px)`, opacity: 0 }
-            ], {
-                duration: Math.random() * 1000 + 500,
-                easing: 'cubic-bezier(0.17, 0.84, 0.44, 1)',
-            });
-
-            animation.onfinish = () => {
-                particle.remove();
-            };
-        }
 
         document.getElementById('waitlist-form').addEventListener('submit', async function(event) {
             event.preventDefault();

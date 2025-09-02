@@ -157,6 +157,102 @@
                 opacity: 0;
             }
         }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .floating-orb {
+                width: 150px !important;
+                height: 150px !important;
+                filter: blur(40px);
+            }
+            
+            .hero-gradient {
+                background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.1) 0%, rgba(112, 0, 255, 0.05) 50%, transparent 70%);
+            }
+        }
+        
+        /* Carousel Styles */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .carousel-slide {
+            min-width: 100%;
+            flex-shrink: 0;
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .carousel-nav:hover {
+            background: rgba(0, 240, 255, 0.2);
+            border-color: rgba(0, 240, 255, 0.4);
+        }
+        
+        .carousel-nav.prev {
+            left: 16px;
+        }
+        
+        .carousel-nav.next {
+            right: 16px;
+        }
+        
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-dot.active {
+            background: linear-gradient(135deg, #00F0FF, #7000FF);
+            transform: scale(1.2);
+        }
+        
+        /* Hide carousel on desktop */
+        @media (min-width: 769px) {
+            .mobile-carousel {
+                display: none;
+            }
+        }
+        
+        /* Hide grid on mobile */
+        @media (max-width: 768px) {
+            .desktop-grid {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -222,7 +318,7 @@
             </div>
             
             <!-- Main Heading -->
-            <h1 class="text-6xl md:text-7xl lg:text-8xl font-bold font-display leading-tight mb-8" data-aos="fade-up" data-aos-delay="100">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-display leading-tight mb-8" data-aos="fade-up" data-aos-delay="100">
                 See <span class="gradient-text">SyncFlo Ai</span><br>
                 <span class="text-white/90">In Action</span>
             </h1>
@@ -278,7 +374,8 @@
                 </p>
             </div>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Desktop Grid -->
+            <div class="desktop-grid grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Feature 1 -->
                 <div class="glass-card p-8 rounded-3xl card-hover" data-aos="fade-up" data-aos-delay="100">
                     <div class="feature-icon w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
@@ -355,6 +452,126 @@
                     <p class="text-white/70 leading-relaxed">
                         Get all your questions answered by our technical experts and implementation specialists.
                     </p>
+                </div>
+            </div>
+
+            <!-- Mobile Carousel -->
+            <div class="mobile-carousel">
+                <div class="carousel-container relative">
+                    <!-- Navigation Buttons -->
+                    <button class="carousel-nav prev" id="carousel-prev">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <button class="carousel-nav next" id="carousel-next">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+
+                    <!-- Carousel Track -->
+                    <div class="carousel-track" id="carousel-track">
+                        <!-- Slide 1 -->
+                        <div class="carousel-slide px-4">
+                            <div class="glass-card p-6 rounded-3xl text-center">
+                                <div class="feature-icon w-16 h-16 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                                    <svg class="w-8 h-8 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold mb-4">Live AI Demo</h3>
+                                <p class="text-white/70 leading-relaxed text-sm">
+                                    Watch SyncFlo Ai process real data and automate complex workflows in real-time during your personalized session.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2 -->
+                        <div class="carousel-slide px-4">
+                            <div class="glass-card p-6 rounded-3xl text-center">
+                                <div class="feature-icon w-16 h-16 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                                    <svg class="w-8 h-8 text-accent2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold mb-4">Expert Consultation</h3>
+                                <p class="text-white/70 leading-relaxed text-sm">
+                                    Get personalized insights from our AI specialists who understand your industry and specific challenges.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3 -->
+                        <div class="carousel-slide px-4">
+                            <div class="glass-card p-6 rounded-3xl text-center">
+                                <div class="feature-icon w-16 h-16 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                                    <svg class="w-8 h-8 text-green_accent" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold mb-4">Custom Use Cases</h3>
+                                <p class="text-white/70 leading-relaxed text-sm">
+                                    See how SyncFlo Ai adapts to your specific business processes and integration requirements.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Slide 4 -->
+                        <div class="carousel-slide px-4">
+                            <div class="glass-card p-6 rounded-3xl text-center">
+                                <div class="feature-icon w-16 h-16 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                                    <svg class="w-8 h-8 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold mb-4">ROI Analysis</h3>
+                                <p class="text-white/70 leading-relaxed text-sm">
+                                    Discover potential cost savings and efficiency gains with detailed ROI projections for your business.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Slide 5 -->
+                        <div class="carousel-slide px-4">
+                            <div class="glass-card p-6 rounded-3xl text-center">
+                                <div class="feature-icon w-16 h-16 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                                    <svg class="w-8 h-8 text-accent2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                                        </svg>
+                                </div>
+                                <h3 class="text-xl font-bold mb-4">Integration Guide</h3>
+                                <p class="text-white/70 leading-relaxed text-sm">
+                                    Learn how SyncFlo Ai seamlessly integrates with your existing tools and systems.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Slide 6 -->
+                        <div class="carousel-slide px-4">
+                            <div class="glass-card p-6 rounded-3xl text-center">
+                                <div class="feature-icon w-16 h-16 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                                    <svg class="w-8 h-8 text-green_accent" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold mb-4">Q&A Session</h3>
+                                <p class="text-white/70 leading-relaxed text-sm">
+                                    Get all your questions answered by our technical experts and implementation specialists.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carousel Dots -->
+                <div class="carousel-dots" id="carousel-dots">
+                    <div class="carousel-dot active" data-slide="0"></div>
+                    <div class="carousel-dot" data-slide="1"></div>
+                    <div class="carousel-dot" data-slide="2"></div>
+                    <div class="carousel-dot" data-slide="3"></div>
+                    <div class="carousel-dot" data-slide="4"></div>
+                    <div class="carousel-dot" data-slide="5"></div>
                 </div>
             </div>
         </div>
@@ -561,6 +778,99 @@
                 }
             });
         });
+
+        // Carousel functionality
+        let currentSlide = 0;
+        const totalSlides = 6;
+        const carouselTrack = document.getElementById('carousel-track');
+        const carouselDots = document.querySelectorAll('.carousel-dot');
+        const prevBtn = document.getElementById('carousel-prev');
+        const nextBtn = document.getElementById('carousel-next');
+
+        function updateCarousel() {
+            const translateX = -currentSlide * 100;
+            carouselTrack.style.transform = `translateX(${translateX}%)`;
+            
+            // Update dots
+            carouselDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            updateCarousel();
+        }
+
+        // Event listeners for carousel
+        if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+        if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+
+        // Dot navigation
+        carouselDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => goToSlide(index));
+        });
+
+        // Auto-play carousel (optional)
+        let autoPlayInterval;
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+        }
+
+        function stopAutoPlay() {
+            clearInterval(autoPlayInterval);
+        }
+
+        // Start auto-play on mobile
+        if (window.innerWidth <= 768) {
+            startAutoPlay();
+            
+            // Pause auto-play when user interacts
+            const carouselContainer = document.querySelector('.carousel-container');
+            if (carouselContainer) {
+                carouselContainer.addEventListener('mouseenter', stopAutoPlay);
+                carouselContainer.addEventListener('mouseleave', startAutoPlay);
+                carouselContainer.addEventListener('touchstart', stopAutoPlay);
+            }
+        }
+
+        // Touch/swipe support for mobile
+        let startX = 0;
+        let endX = 0;
+
+        if (carouselTrack) {
+            carouselTrack.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            });
+
+            carouselTrack.addEventListener('touchend', (e) => {
+                endX = e.changedTouches[0].clientX;
+                handleSwipe();
+            });
+        }
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = startX - endX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    nextSlide(); // Swipe left - next slide
+                } else {
+                    prevSlide(); // Swipe right - previous slide
+                }
+            }
+        }
     </script>
 </body>
 </html>

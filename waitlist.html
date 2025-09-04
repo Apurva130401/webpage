@@ -79,6 +79,99 @@
             opacity: 1;
             margin-top: 1.5rem; /* Same as space-y-6 */
         }
+
+        /* Chatbot Styles */
+        #chat-bubble {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 4rem;
+            height: 4rem;
+            background: linear-gradient(90deg, #00F0FF, #7000FF);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+            transition: transform 0.3s ease;
+        }
+        #chat-bubble:hover {
+            transform: scale(1.1);
+        }
+        #chat-window {
+            position: fixed;
+            bottom: 7rem;
+            right: 2rem;
+            width: 90%;
+            max-width: 400px;
+            height: 70vh;
+            max-height: 600px;
+            background-color: #141A28;
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            pointer-events: none;
+        }
+        #chat-window.open {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .chat-message {
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 0.5rem;
+            max-width: 80%;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+        .user-message {
+            background: linear-gradient(90deg, #00F0FF, #7000FF);
+            color: #0B0F19;
+            align-self: flex-end;
+        }
+        .ai-message {
+            background-color: #2A3142;
+            color: white;
+            align-self: flex-start;
+        }
+        .ai-message a {
+            color: #00F0FF;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        .ai-message a:hover {
+            color: #7000FF;
+        }
+        .chat-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            align-self: flex-start;
+        }
+        .chat-button {
+            background-color: #2A3142;
+            border: 1px solid #00F0FF;
+            color: #00F0FF;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .chat-button:hover {
+            background-color: #00F0FF;
+            color: #141A28;
+        }
     </style>
 </head>
 <body class="antialiased hero-pattern">
@@ -303,6 +396,322 @@
                 submitBtn.innerHTML = originalButtonText;
             }
         });
+
+        // --- Chatbot Scripts ---
+
+        const chatBubble = document.getElementById('chat-bubble');
+        const chatWindow = document.getElementById('chat-window');
+        const closeChat = document.getElementById('close-chat');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const chatSend = document.getElementById('chat-send');
+        const generatePitchButton = document.getElementById('generate-pitch');
+        
+        // IMPORTANT: Add your own Gemini API Key here
+        const apiKey = "AIzaSyDftfcS4AQNPYo3Q2joZmYikWB4vpO_SfI"; 
+
+        // --- Function Calling Setup ---
+
+        // 1. Define the tools (our JavaScript functions)
+        const tools = {
+            redirectToCalendly(name, email) {
+                const calendlyUrl = `https://calendly.com/syncfloai/30min?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
+                window.open(calendlyUrl, '_blank');
+                return `Success! I have opened the Calendly booking page for ${name}.`;
+            },
+            displayButtons(buttons) {
+                 return `Displayed buttons: ${buttons.join(', ')}`;
+            },
+            openLink(url) {
+                window.open(url, '_blank');
+                return `Successfully opened ${url}`;
+            }
+        };
+
+        // 2. Define the tools' schema for the AI
+        const toolDefinitions = [{
+            "functionDeclarations": [{
+                "name": "redirectToCalendly",
+                "description": "After collecting the user's name and email, use this function to redirect them to the Calendly page to book a demo.",
+                "parameters": {
+                    "type": "OBJECT",
+                    "properties": {
+                        "name": { "type": "STRING", "description": "The user's full name." },
+                        "email": { "type": "STRING", "description": "The user's email address." }
+                    },
+                    "required": ["name", "email"]
+                }
+            }, {
+                 "name": "displayButtons",
+                "description": "Display clickable suggestion buttons to the user in the chat.",
+                "parameters": {
+                    "type": "OBJECT",
+                    "properties": {
+                        "buttons": {
+                            "type": "ARRAY",
+                            "description": "An array of button labels to display.",
+                            "items": { "type": "STRING" }
+                        }
+                    },
+                    "required": ["buttons"]
+                }
+            }, {
+                "name": "openLink",
+                "description": "Use this function to open any URL in a new browser tab.",
+                "parameters": {
+                    "type": "OBJECT",
+                    "properties": {
+                        "url": { "type": "STRING", "description": "The full URL to open." }
+                    },
+                    "required": ["url"]
+                }
+            }]
+        }];
+        
+        // 3. Define the initial prompt for the AI
+        let chatHistory = [{
+            role: "user",
+            parts: [{ text: "You are a fun, friendly and helpful Sales assistant for SyncFlo Ai. You are talking on behalf of SyncFlo and your goal is to answer questions about the company and its products (WhatsApp Automation, AI Voice Sales Agent). Your primary goal is to understand the user's needs and explain how SyncFlo's products can solve their problems. Only suggest a demo when it's a natural next step. If a user wants to book a demo, you MUST first ask them if they want a mock demo or a live demo by calling the `displayButtons` tool with the options 'Show me a mock demo' and 'Book a live demo'. If they choose live demo, you MUST use the `redirectToCalendly` tool after getting their name and email. If they choose mock demo, tell the user they can see it on our website and by calling the 'displayButtons' tool with options 'Go to Demo Page' and 'Go to Industry Page' and when the user clicks the 'Go to Demo Page' button, immediately use the 'openlink' tool and open 'https://syncflo.xyz/demo'. And If the user chooses 'Go to Industry Page', immediatley use the 'openlink' tool and open 'https://syncflo.xyz/whatsapp-industry'. If a user asks about pricing, tell them it starts at $99/month and then immediately use the `openLink` tool to show them the full details at 'https://syncflo.xyz/pricing.html'. Keep messages short. Do not make up information. Also the founder of SyncFlo AI is Apurva" }]
+        }, {
+            role: "model",
+            parts: [{ text: "Okay, I understand. My main goal is to be a helpful sales assistant, understand customer needs, and explain how our products can help. I will use my tools to provide demos and pricing information when appropriate. How can I help you today?" }]
+        }];
+
+
+        // --- Chat Logic ---
+
+        chatBubble.addEventListener('click', () => chatWindow.classList.toggle('open'));
+        closeChat.addEventListener('click', () => chatWindow.classList.remove('open'));
+
+        function addMessage(message, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('chat-message', sender === 'user' ? 'user-message' : 'ai-message');
+
+            if (sender === 'ai') {
+                const urlRegex = /(https?:\/\/[^\s]+)/g;
+                const sanitizedMessage = message.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                const messageWithLinks = sanitizedMessage.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer" class="font-bold underline">$1</a>');
+                messageElement.innerHTML = messageWithLinks;
+            } else {
+                messageElement.textContent = message;
+            }
+            
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        function showTypingIndicator() {
+            const typingElement = document.createElement('div');
+            typingElement.id = 'typing-indicator';
+            typingElement.classList.add('chat-message', 'ai-message');
+            typingElement.innerHTML = `<div class="flex items-center space-x-1"><span class="w-2 h-2 bg-white/50 rounded-full animate-pulse" style="animation-delay: 0s;"></span><span class="w-2 h-2 bg-white/50 rounded-full animate-pulse" style="animation-delay: 0.2s;"></span><span class="w-2 h-2 bg-white/50 rounded-full animate-pulse" style="animation-delay: 0.4s;"></span></div>`;
+            chatMessages.appendChild(typingElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        function removeTypingIndicator() {
+            const typingElement = document.getElementById('typing-indicator');
+            if (typingElement) typingElement.remove();
+        }
+
+        async function handleAiResponse(response) {
+            removeTypingIndicator();
+            const candidate = response.candidates[0];
+
+            if (!candidate || !candidate.content || !candidate.content.parts) {
+                addMessage("Sorry, I received an invalid response. Please try again.", 'ai');
+                return;
+            }
+
+            const modelResponsePart = { role: "model", parts: [] };
+            let textResponse = null;
+            let functionCall = null;
+
+            candidate.content.parts.forEach(part => {
+                if (part.text) {
+                    textResponse = part.text;
+                    modelResponsePart.parts.push({ text: textResponse });
+                } else if (part.functionCall) {
+                    functionCall = part.functionCall;
+                    modelResponsePart.parts.push({ functionCall: functionCall });
+                }
+            });
+
+            // Add the full model response to history first
+            if (modelResponsePart.parts.length > 0) {
+                 chatHistory.push(modelResponsePart);
+            }
+
+            // Then, process the parts for the UI
+            if (textResponse) {
+                addMessage(textResponse, 'ai');
+            }
+
+            if (functionCall) {
+                const functionName = functionCall.name;
+                const functionArgs = functionCall.args;
+                
+                // Add the function's result to history so the AI knows what happened
+                const functionResponse = {
+                    role: "function",
+                    parts: [{ functionResponse: { name: functionName, response: {} } }]
+                };
+                
+                if (functionName === 'displayButtons') {
+                    const buttonContainer = document.createElement('div');
+                    buttonContainer.className = 'chat-buttons';
+                    functionArgs.buttons.forEach(label => {
+                        const button = document.createElement('button');
+                        button.className = 'chat-button';
+                        button.textContent = label;
+                        button.addEventListener('click', () => {
+                            sendMessage(label);
+                            buttonContainer.remove();
+                        });
+                        buttonContainer.appendChild(button);
+                    });
+                    chatMessages.appendChild(buttonContainer);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    // We don't call the API again, we wait for the user click
+                } else if (functionName === 'redirectToCalendly' || functionName === 'openLink') {
+                    const functionResult = tools[functionName](functionArgs.name || functionArgs.url, functionArgs.email);
+                    functionResponse.parts[0].functionResponse.response.content = functionResult;
+                    chatHistory.push(functionResponse);
+                    await callGeminiApi(); // Call again to get the confirmation text
+                }
+            }
+        }
+
+        async function callGeminiApi(prompt = null) {
+            try {
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                
+                const currentHistory = prompt ? [...chatHistory, { role: 'user', parts: [{ text: prompt }] }] : chatHistory;
+
+                const payload = { 
+                    contents: currentHistory,
+                    tools: toolDefinitions
+                };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorBody = await response.text();
+                    console.error("API Error Body:", errorBody);
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
+                
+                const result = await response.json();
+                await handleAiResponse(result);
+
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+                removeTypingIndicator();
+                addMessage("Sorry, something went wrong. Please check your API key and the console for details.", 'ai');
+            }
+        }
+
+        async function generateQuickPitch() {
+            showTypingIndicator();
+            const prompt = `Based on the conversation history and SyncFlo Ai's products (WhatsApp Automation and AI Voice Sales Agent), write a short, compelling sales pitch for a business. The pitch should be no more than 3 sentences. Do not use any placeholders like [Client Name] or [Your Company].`;
+            
+            // Clear history and add new prompt to get a fresh pitch
+            const pitchHistory = [{
+                role: "user",
+                parts: [{ text: prompt }]
+            }];
+
+            try {
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                
+                const payload = { 
+                    contents: pitchHistory
+                };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorBody = await response.text();
+                    console.error("API Error Body:", errorBody);
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
+                
+                const result = await response.json();
+                removeTypingIndicator();
+                
+                const generatedPitch = result.candidates[0].content.parts[0].text;
+                addMessage(`✨ Here is a quick pitch for you: "${generatedPitch}"`, 'ai');
+
+            } catch (error) {
+                console.error("Error generating pitch:", error);
+                removeTypingIndicator();
+                addMessage("Sorry, I couldn't generate a pitch right now. Please try again.", 'ai');
+            }
+        }
+
+        async function sendMessage(messageOverride = null) {
+            const messageText = messageOverride || chatInput.value.trim();
+            if (messageText === '') return;
+
+            addMessage(messageText, 'user');
+            if (!messageOverride) {
+                chatInput.value = '';
+            }
+            showTypingIndicator();
+            
+            chatHistory.push({ role: "user", parts: [{ text: messageText }] });
+            await callGeminiApi();
+        }
+
+        chatSend.addEventListener('click', () => sendMessage());
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        generatePitchButton.addEventListener('click', () => generateQuickPitch());
+
     </script>
+
+    <!-- Chatbot HTML -->
+    <div id="chat-bubble">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.02-3.11A7.002 7.002 0 012 10c0-3.866, 3.582-7, 8-7s8, 3.134, 8, 7zM4.416, 14.65A6.986, 6.986, 0 0, 0, 10, 16c3.309, 0, 6-2.691, 6-6s-2.691-6-6-6-6, 2.691-6, 6c0, 1.562.602, 3.002, 1.626, 4.118L4.416, 14.65z" clip-rule="evenodd" />
+        </svg>
+    </div>
+
+    <div id="chat-window" class="">
+        <div class="p-4 bg-secondary border-b border-white/10 flex justify-between items-center">
+            <h3 class="font-display font-bold text-lg"><span class="gradient-text">SyncFlo</span> Ai Assistant</h3>
+            <button id="close-chat" class="text-white/70 hover:text-white">
+                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+        </div>
+        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto flex flex-col">
+            <!-- Messages will be appended here -->
+             <div class="chat-message ai-message">
+                Hello! I'm your sales assistant. I can answer questions about SyncFlo Ai and our products. Try asking me to create a quick pitch for you!
+            </div>
+        </div>
+        <div class="p-4 bg-secondary border-t border-white/10">
+            <div class="flex items-center">
+                <input type="text" id="chat-input" placeholder="Ask a question or type 'create pitch'..." class="flex-1 bg-primary border border-white/10 rounded-full py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-accent">
+                <button id="chat-send" class="ml-3 p-2 bg-gradient-to-r from-accent to-accent2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                </button>
+            </div>
+             <button id="generate-pitch" class="w-full mt-3 bg-white/10 border border-white/20 text-white font-semibold px-8 py-2 rounded-full text-center hover:bg-white/20 transition-colors">
+                ✨ Generate a Quick Pitch
+            </button>
+        </div>
+    </div>
+
 </body>
 </html>

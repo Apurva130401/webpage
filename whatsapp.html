@@ -96,7 +96,7 @@
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="#key-features" class="nav-link text-white/80 hover:text-green_accent transition-colors">Features</a>
                     <a href="#use-cases" class="nav-link text-white/80 hover:text-green_accent transition-colors">Use Cases</a>
-                    <a href="whatsapp_plans.html" class="nav-link text-white/80 hover:text-green_accent transition-colors">Pricing</a>
+                    <a href="#pricing" class="nav-link text-white/80 hover:text-green_accent transition-colors">Pricing</a>
                     <a href="index.html#products" class="text-white/80 hover:text-green_accent transition-colors">All Products</a>
                     <a href="#faq" class="nav-link text-white/80 hover:text-green_accent transition-colors">FAQ</a>
                     <a href="contact.html" class="bg-gradient-to-r from-green_accent to-blue_accent text-primary font-semibold px-6 py-2 rounded-full hover:opacity-90 transition-opacity">Contact Us</a>
@@ -240,6 +240,78 @@
         </div>
     </section>
 
+    <!-- WhatsApp Business AI Pricing Section -->
+    <section id="pricing" class="py-20 bg-primary">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">WhatsApp Business AI <span class="gradient-text">Plans</span></h2>
+                <p class="text-white/70 max-w-2xl mx-auto">Choose the perfect plan to automate your customer communication and scale your business.</p>
+            </div>
+
+            <!-- Monthly/Annual Toggle -->
+            <div class="flex justify-center items-center space-x-4 mb-12" data-aos="fade-up">
+                <span class="font-semibold text-lg text-white/80">Monthly</span>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="whatsapp-price-toggle" class="sr-only peer">
+                    <div class="w-14 h-8 bg-secondary peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-green_accent"></div>
+                </label>
+                <span class="font-semibold text-lg text-white/80">Annually <span class="text-xs text-green_accent">(Save 20%)</span></span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                <!-- Starter Plan -->
+                <div class="pricing-card bg-secondary p-8 rounded-xl border border-white/10 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-2xl font-bold font-display mb-2">Starter</h3>
+                    <p class="text-white/70 mb-6">Perfect for small businesses starting their automation journey.</p>
+                    <div class="text-4xl font-bold font-display mb-6">
+                        $<span class="price" data-monthly="99" data-annual="79">99</span><span class="text-lg font-normal text-white/70 price-period">/mo</span>
+                    </div>
+                    <ul class="space-y-4 text-white/90 mb-8">
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-green_accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>1,000 WhatsApp conversations / mo</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-green_accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>1 business number</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-green_accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Basic chatbot flows & FAQs</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-green_accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Notion/Sheets logging</li>
+                    </ul>
+                    <a href="contact.html" class="w-full block text-center bg-white/10 border border-white/20 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/20 transition-colors">Get Started</a>
+                </div>
+
+                <!-- Growth Plan (Most Popular) -->
+                <div class="pricing-card popular bg-secondary p-8 rounded-xl border-2 border-green_accent transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl relative" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2">
+                        <div class="bg-gradient-to-r from-green_accent to-blue_accent text-primary font-semibold px-4 py-1 rounded-full text-sm">Most Popular</div>
+                    </div>
+                    <h3 class="text-2xl font-bold font-display mb-2">Growth</h3>
+                    <p class="text-white/70 mb-6">For growing businesses ready to scale their operations.</p>
+                    <div class="text-4xl font-bold font-display mb-6">
+                        $<span class="price" data-monthly="249" data-annual="199">249</span><span class="text-lg font-normal text-white/70 price-period">/mo</span>
+                    </div>
+                    <ul class="space-y-4 text-white/90 mb-8">
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-green_accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>5,000 conversations / mo</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-green_accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>3 business numbers</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-green_accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Catalog integration (E-com / Real Estate / Healthcare)</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-green_accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Marketing broadcasts</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-green_accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Basic CRM integration</li>
+                    </ul>
+                    <a href="contact.html" class="w-full block text-center bg-gradient-to-r from-green_accent to-blue_accent text-primary font-semibold px-6 py-4 rounded-full hover:opacity-90 transition-opacity">Get Started</a>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="pricing-card bg-secondary p-8 rounded-xl border border-white/10 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-2xl font-bold font-display mb-2">Enterprise</h3>
+                    <p class="text-white/70 mb-6">Custom solutions for large organizations with advanced needs.</p>
+                    <div class="text-4xl font-bold font-display mb-6">Custom Pricing</div>
+                    <ul class="space-y-4 text-white/90 mb-8">
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-green_accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Unlimited conversations</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-green_accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Multi-agent handoff dashboard</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-green_accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>White-label option</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-green_accent flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Dedicated Success Manager</li>
+                    </ul>
+                    <a href="contact.html" class="w-full block text-center bg-white/10 border border-white/20 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/20 transition-colors">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- FAQ Section -->
     <section id="faq" class="py-20 bg-primary">
         <div class="container mx-auto px-6">
@@ -366,6 +438,16 @@
         window.addEventListener('resize', updateSliderButtons);
         // Initial check
         setTimeout(updateSliderButtons, 100);
+
+        // WhatsApp Pricing Toggle Logic
+        const whatsappPriceToggle = document.getElementById('whatsapp-price-toggle');
+        if (whatsappPriceToggle) {
+            whatsappPriceToggle.addEventListener('change', function() {
+                const isAnnual = this.checked;
+                document.querySelectorAll('#pricing .price').forEach(p => p.textContent = p.dataset[isAnnual ? 'annual' : 'monthly']);
+                document.querySelectorAll('#pricing .price-period').forEach(p => p.textContent = isAnnual ? '/yr' : '/mo');
+            });
+        }
 
     </script>
 </body>

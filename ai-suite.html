@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full AI Business Suite - SyncFlo Ai</title>
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOS Animation Library CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0B0F19',
+                        secondary: '#141A28',
+                        accent: '#00F0FF',
+                        accent2: '#7000FF',
+                        green_accent: '#00FF87',
+                        blue_accent: '#00A3FF',
+                        sales_orange: '#FF8C00',
+                        sales_red: '#FF4500',
+                        suite_purple: '#A855F7',
+                        suite_pink: '#EC4899',
+                        muted: '#8A8F98'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: #0B0F19;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .gradient-text-suite {
+            background: linear-gradient(90deg, #A855F7, #EC4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .hero-pattern {
+            background-image: radial-gradient(circle at 10% 20%, rgba(112, 0, 255, 0.1) 0%, transparent 25%),
+                             radial-gradient(circle at 80% 60%, rgba(255, 0, 128, 0.05) 0%, transparent 25%);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(112, 0, 255, 0.1);
+        }
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(112, 0, 255, 0.1);
+        }
+        .faq-item .faq-question { cursor: pointer; }
+        .faq-item .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+            padding-top: 1rem;
+        }
+        .faq-item.open .faq-arrow { transform: rotate(180deg); }
+        .faq-arrow { transition: transform 0.3s ease-in-out; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-primary/80 backdrop-blur-lg border-b border-white/10">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center">
+                    <div class="text-3xl font-bold font-display">
+                        <span class="gradient-text-suite">SyncFlo</span><span class="text-white">Ai</span>
+                    </div>
+                </a>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#features-suite" class="nav-link text-white/80 hover:text-suite_purple transition-colors">Features</a>
+                    <a href="#how-it-works" class="nav-link text-white/80 hover:text-suite_purple transition-colors">How It Works</a>
+                    <a href="#pricing" class="nav-link text-white/80 hover:text-suite_purple transition-colors">Pricing</a>
+                    <a href="#use-cases" class="nav-link text-white/80 hover:text-suite_purple transition-colors">Use Cases</a>
+                    <a href="#faq" class="nav-link text-white/80 hover:text-suite_purple transition-colors">FAQ</a>
+                    <a href="contact.html" class="bg-gradient-to-r from-suite_purple to-suite_pink text-primary font-semibold px-6 py-2 rounded-full hover:opacity-90 transition-opacity">Contact Us</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-secondary border-t border-white/10">
+            <div class="container mx-auto px-6 py-4 space-y-4">
+                <a href="#features-suite" class="nav-link block text-white/80 hover:text-suite_purple transition-colors">Features</a>
+                <a href="#how-it-works" class="nav-link block text-white/80 hover:text-suite_purple transition-colors">How It Works</a>
+                <a href="#pricing" class="nav-link block text-white/80 hover:text-suite_purple transition-colors">Pricing</a>
+                <a href="#use-cases" class="nav-link block text-white/80 hover:text-suite_purple transition-colors">Use Cases</a>
+                <a href="#faq" class="nav-link block text-white/80 hover:text-suite_purple transition-colors">FAQ</a>
+                <a href="contact.html" class="block bg-gradient-to-r from-suite_purple to-suite_pink text-primary font-semibold px-6 py-2 rounded-full text-center hover:opacity-90 transition-opacity">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-pattern min-h-screen flex items-center pt-24 pb-16">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <div class="inline-block bg-suite_pink/20 text-suite_purple px-4 py-1 rounded-full text-sm font-medium mb-4" data-aos="fade-down">
+                    Complete AI Business Suite
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold font-display leading-tight mb-6" data-aos="fade-down" data-aos-delay="100">
+                    Everything You Need in <span class="gradient-text-suite">One Platform</span>
+                </h1>
+                <p class="text-xl text-white/80 mb-8 max-w-3xl mx-auto" data-aos="fade-down" data-aos-delay="200">
+                    Combine WhatsApp automation and AI voice agents for complete customer communication coverage. Scale your business with unified AI-powered solutions.
+                </p>
+                <a href="#pricing" class="bg-gradient-to-r from-suite_purple to-suite_pink text-white font-semibold px-8 py-3 rounded-full text-center hover:opacity-90 transition-opacity" data-aos="fade-up" data-aos-delay="300">
+                    View Pricing
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features-suite" class="py-20 bg-secondary">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">Unified AI <span class="gradient-text-suite">Power</span></h2>
+                <p class="text-white/70 max-w-2xl mx-auto">Seamlessly integrate WhatsApp chatbots and voice agents for a complete customer experience.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card bg-primary/80 backdrop-blur-sm p-8 rounded-xl border border-white/10" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-suite_purple/10 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="h-8 w-8 text-suite_purple" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold font-display mb-3">Unified Dashboard</h3>
+                    <p class="text-white/70 mb-4">Manage all your AI agents from a single, intuitive dashboard with real-time analytics and performance metrics.</p>
+                </div>
+
+                <div class="feature-card bg-primary/80 backdrop-blur-sm p-8 rounded-xl border border-white/10" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-suite_purple/10 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="h-8 w-8 text-suite_purple" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold font-display mb-3">Seamless Integration</h3>
+                    <p class="text-white/70 mb-4">Connect your CRM, calendar, and business tools once and use them across both chat and voice channels.</p>
+                </div>
+
+                <div class="feature-card bg-primary/80 backdrop-blur-sm p-8 rounded-xl border border-white/10" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-suite_purple/10 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="h-8 w-8 text-suite_purple" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold font-display mb-3">Advanced Analytics</h3>
+                    <p class="text-white/70 mb-4">Get comprehensive insights across all channels with unified reporting and performance tracking.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 bg-primary">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">Complete Solution in <span class="gradient-text-suite">Minutes</span></h2>
+            </div>
+            <div class="relative grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <!-- Dotted Line for Desktop -->
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-px -translate-y-1/2">
+                    <svg width="100%" height="2"><line x1="0" y1="1" x2="100%" y2="1" stroke-width="2" stroke="rgba(112, 0, 255, 0.3)" stroke-dasharray="8 8" /></svg>
+                </div>
+                <div class="relative" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-24 h-24 mx-auto bg-secondary border-2 border-suite_purple rounded-full flex items-center justify-center text-3xl font-bold font-display mb-4">1</div>
+                    <h3 class="text-xl font-bold font-display mb-2">Connect Your Tools</h3>
+                    <p class="text-white/70">Link your CRM, calendar, and business systems in one unified setup.</p>
+                </div>
+                <div class="relative" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-24 h-24 mx-auto bg-secondary border-2 border-suite_purple rounded-full flex items-center justify-center text-3xl font-bold font-display mb-4">2</div>
+                    <h3 class="text-xl font-bold font-display mb-2">Configure AI Agents</h3>
+                    <p class="text-white/70">Set up both WhatsApp chatbots and voice agents with your brand personality.</p>
+                </div>
+                <div class="relative" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-24 h-24 mx-auto bg-secondary border-2 border-suite_purple rounded-full flex items-center justify-center text-3xl font-bold font-display mb-4">3</div>
+                    <h3 class="text-xl font-bold font-display mb-2">Go Live Instantly</h3>
+                    <p class="text-white/70">Launch both channels simultaneously and start engaging customers 24/7.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section id="use-cases" class="py-20 bg-secondary">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">Perfect for <span class="gradient-text-suite">Every Business</span></h2>
+                <p class="text-white/70 max-w-2xl mx-auto">From startups to enterprises, our unified AI suite adapts to your needs.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-primary p-6 rounded-xl border border-white/10 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="font-bold text-lg mb-2">E-commerce</h3>
+                    <p class="text-white/70 text-sm">Order tracking, returns, and personalized recommendations across chat and voice.</p>
+                </div>
+                <div class="bg-primary p-6 rounded-xl border border-white/10 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="150">
+                    <h3 class="font-bold text-lg mb-2">Healthcare</h3>
+                    <p class="text-white/70 text-sm">Appointment scheduling, reminders, and patient support through multiple channels.</p>
+                </div>
+                <div class="bg-primary p-6 rounded-xl border border-white/10 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="font-bold text-lg mb-2">Real Estate</h3>
+                    <p class="text-white/70 text-sm">Property inquiries, virtual tours, and lead qualification via WhatsApp and calls.</p>
+                </div>
+                <div class="bg-primary p-6 rounded-xl border border-white/10 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="250">
+                    <h3 class="font-bold text-lg mb-2">Professional Services</h3>
+                    <p class="text-white/70 text-sm">Consultation booking, client support, and automated follow-ups.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-primary">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">Full AI Business Suite <span class="gradient-text-suite">Plans</span></h2>
+                <p class="text-white/70 max-w-2xl mx-auto">Combine WhatsApp automation and voice agents for complete customer communication coverage.</p>
+            </div>
+
+            <!-- Monthly/Annual Toggle -->
+            <div class="flex justify-center items-center space-x-4 mb-12" data-aos="fade-up">
+                <span class="font-semibold text-lg text-white/80">Monthly</span>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="suite-price-toggle" class="sr-only peer">
+                    <div class="w-14 h-8 bg-secondary peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-suite_purple"></div>
+                </label>
+                <span class="font-semibold text-lg text-white/80">Annually <span class="text-xs text-suite_purple">(Save 20%)</span></span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                <!-- Starter Suite Plan -->
+                <div class="pricing-card bg-secondary p-8 rounded-xl border border-white/10 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl">
+                    <h3 class="text-2xl font-bold font-display mb-2">Starter Suite</h3>
+                    <p class="text-white/70 mb-6">Perfect for businesses combining chat and voice automation.</p>
+                    <div class="text-4xl font-bold font-display mb-6">
+                        $<span class="price" data-monthly="199" data-annual="159">199</span><span class="text-lg font-normal text-white/70 price-period">/mo</span>
+                    </div>
+                    <ul class="space-y-4 text-white/90 mb-8">
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-suite_purple flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>WhatsApp Starter + Voice Growth</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-suite_purple flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>1,000 conversations</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-suite_purple flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>500 AI call minutes</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-suite_purple flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>1 WhatsApp number + 1 Phone number</li>
+                    </ul>
+                    <a href="contact.html" class="w-full block text-center bg-white/10 border border-white/20 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/20 transition-colors">Get Started</a>
+                </div>
+
+                <!-- Growth Suite Plan (Most Popular) -->
+                <div class="pricing-card popular bg-secondary p-8 rounded-xl border-2 border-suite_purple transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl relative">
+                    <div class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2">
+                        <div class="bg-gradient-to-r from-suite_purple to-suite_pink text-primary font-semibold px-4 py-1 rounded-full text-sm">Most Popular</div>
+                    </div>
+                    <h3 class="text-2xl font-bold font-display mb-2">Growth Suite</h3>
+                    <p class="text-white/70 mb-6">Complete automation solution for scaling businesses.</p>
+                    <div class="text-4xl font-bold font-display mb-6">
+                        $<span class="price" data-monthly="549" data-annual="439">549</span><span class="text-lg font-normal text-white/70 price-period">/mo</span>
+                    </div>
+                    <ul class="space-y-4 text-white/90 mb-8">
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-suite_purple flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>WhatsApp Growth + Voice Performance</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-suite_purple flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>5,000 conversations</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-suite_purple flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>2,000 call minutes</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-suite_purple flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>3 WhatsApp numbers + 5 Phone numbers</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-suite_purple flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>CRM integration (both chat + voice)</li>
+                    </ul>
+                    <a href="contact.html" class="w-full block text-center bg-gradient-to-r from-suite_purple to-suite_pink text-primary font-semibold px-6 py-4 rounded-full hover:opacity-90 transition-opacity">Get Started</a>
+                </div>
+
+                <!-- Enterprise Suite Plan -->
+                <div class="pricing-card bg-secondary p-8 rounded-xl border border-white/10 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl">
+                    <h3 class="text-2xl font-bold font-display mb-2">Enterprise Suite</h3>
+                    <p class="text-white/70 mb-6">Unlimited AI power for enterprise-scale operations.</p>
+                    <div class="text-4xl font-bold font-display mb-6">Custom Pricing</div>
+                    <ul class="space-y-4 text-white/90 mb-8">
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-suite_purple flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Unlimited conversations & call minutes</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-suite_purple flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>White-label dashboard</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-suite_purple flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Custom voice cloning + industry-trained AI</li>
+                        <li class="flex items-center"><svg class="h-5 w-5 mr-3 text-suite_purple flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Dedicated account manager</li>
+                    </ul>
+                    <a href="contact.html" class="w-full block text-center bg-white/10 border border-white/20 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/20 transition-colors">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-secondary">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">Suite <span class="gradient-text-suite">Questions</span></h2>
+            </div>
+            <div class="max-w-3xl mx-auto space-y-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="faq-item bg-primary/50 rounded-lg border border-white/10 p-6">
+                    <div class="faq-question flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">How does the unified dashboard work?</h3>
+                        <svg class="faq-arrow w-6 h-6 text-suite_purple transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-white/70 px-6 pb-6">
+                            Our unified dashboard provides a single view of all your AI agents across WhatsApp and voice channels. Monitor performance, manage conversations, and access analytics from one centralized location.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item bg-primary/50 rounded-lg border border-white/10 p-6">
+                    <div class="faq-question flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Can I start with one channel and add the other later?</h3>
+                        <svg class="faq-arrow w-6 h-6 text-suite_purple transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </div>
+                    <div class="faq-answer text-white/70">
+                        <p class="px-6 pb-6">
+                            Absolutely! You can start with either WhatsApp automation or voice agents, then seamlessly add the other channel later. Your existing setup and integrations will carry over automatically.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item bg-primary/50 rounded-lg border border-white/10 p-6">
+                    <div class="faq-question flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">What makes this different from using separate tools?</h3>
+                        <svg class="faq-arrow w-6 h-6 text-suite_purple transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </div>
+                    <div class="faq-answer text-white/70">
+                        <p class="px-6 pb-6">
+                            Unlike separate tools, our unified suite shares integrations, knowledge bases, and analytics across channels. Customers get consistent experiences, and you get simplified management with cross-channel insights.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-primary border-t border-white/10">
+        <div class="container mx-auto px-6 text-center text-white/70">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="data-processing.html" class="hover:text-accent transition-colors">Data Processing</a>
+                <a href="terms.html" class="hover:text-accent transition-colors">Terms of Service</a>
+                <a href="privacy-policy.html" class="hover:text-accent transition-colors">Privacy Policy</a>
+                <a href="sitemap.xml" class="hover:text-accent transition-colors">Sitemap</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId.startsWith('#')) {
+                    e.preventDefault();
+                    document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                document.querySelectorAll('.faq-item.open').forEach(openItem => {
+                    if(openItem !== item) {
+                        openItem.classList.remove('open');
+                    }
+                });
+                item.classList.toggle('open');
+            });
+        });
+
+        // Suite Pricing Toggle Logic
+        const suitePriceToggle = document.getElementById('suite-price-toggle');
+        if (suitePriceToggle) {
+            suitePriceToggle.addEventListener('change', function() {
+                const isAnnual = this.checked;
+                document.querySelectorAll('#pricing .price').forEach(p => p.textContent = p.dataset[isAnnual ? 'annual' : 'monthly']);
+                document.querySelectorAll('#pricing .price-period').forEach(p => p.textContent = isAnnual ? '/yr' : '/mo');
+            });
+        }
+    </script>
+</body>
+</html>

@@ -235,6 +235,41 @@
             background-color: #00F0FF;
             color: #141A28;
         }
+
+        /* FAQ Accordion Styles */
+        .faq-item {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .faq-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 0;
+            background: none;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+            padding-top: 1rem;
+        }
+        .faq-arrow {
+            transition: transform 0.3s ease-in-out;
+        }
+        .faq-item.open .faq-arrow {
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 <body>
@@ -247,11 +282,12 @@
                     </div>
                 </a>
                 <div class="hidden md:flex space-x-8 items-center">
+                    <a href="products.html" class="nav-link text-white/80 hover:text-accent transition-colors">Products</a>
                     <a href="#features" class="nav-link text-white/80 hover:text-accent transition-colors">Features</a>
                     <a href="#why-us" class="nav-link text-white/80 hover:text-accent transition-colors">Why Us</a>
                     <a href="#testimonials" class="nav-link text-white/80 hover:text-accent transition-colors">Testimonials</a>
                     <a href="#about" class="nav-link text-white/80 hover:text-accent transition-colors">About</a>
-					<a href="waitlist.html" class="nav-link text-white/80 hover:text-accent transition-colors">Waitlist</a>
+     <a href="waitlist.html" class="nav-link text-white/80 hover:text-accent transition-colors">Waitlist</a>
                     <a href="contact.html" class="bg-gradient-to-r from-accent to-accent2 text-primary font-semibold px-6 py-2 rounded-full hover:opacity-90 transition-opacity">Contact Us</a>
                 </div>
                 <div class="md:hidden">
@@ -265,6 +301,7 @@
         </div>
         <div id="mobile-menu" class="hidden md:hidden bg-secondary border-t border-white/10">
             <div class="container mx-auto px-6 py-4 space-y-4">
+                <a href="products.html" class="nav-link block text-white/80 hover:text-accent transition-colors">Products</a>
                 <a href="#features" class="nav-link block text-white/80 hover:text-accent transition-colors">Features</a>
                 <a href="#why-us" class="nav-link block text-white/80 hover:text-accent transition-colors">Why Us</a>
                 <a href="#testimonials" class="nav-link block text-white/80 hover:text-accent transition-colors">Testimonials</a>
@@ -351,7 +388,7 @@
                 <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">A Suite of Powerful <span class="gradient-text">AI Tools</span></h2>
                 <p class="text-white/70 max-w-2xl mx-auto">Explore our cutting-edge AI products designed to transform your business operations.</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-primary/80 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 neon-border" style="--glow-start: #00FF87; --glow-end: #00A3FF;" data-aos="fade-up" data-aos-delay="100">
                     <div class="p-8 flex flex-col h-full">
                         <div class="flex-grow"><div class="flex items-center justify-between mb-6"><h3 class="text-2xl font-bold font-display">WhatsApp Business AI</h3><div class="bg-green_accent/20 text-green_accent px-3 py-1 rounded-full text-sm font-medium">Popular</div></div><p class="text-white/70 mb-6">Automate customer interactions, sales processes, and support on WhatsApp with our intelligent AI assistant.</p></div>
@@ -362,6 +399,12 @@
                     <div class="p-8 flex flex-col h-full">
                          <div class="flex-grow"><div class="flex items-center justify-between mb-6"><h3 class="text-2xl font-bold font-display">AI Voice Sales Agent</h3><div class="bg-sales_red/20 text-sales_orange px-3 py-1 rounded-full text-sm font-medium">Cutting Edge</div></div><p class="text-white/70 mb-6">Handle inbound and outbound sales calls 24/7 with a human-like voice agent that can qualify leads and book appointments.</p></div>
                         <div class="flex justify-center items-center mt-auto"><div><a href="voice.html" class="bg-gradient-to-r from-sales_orange to-sales_red text-white font-semibold px-6 py-2 rounded-full hover:opacity-90 transition-opacity">Learn More</a></div></div>
+                    </div>
+                </div>
+                <div class="bg-primary/80 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 neon-border" style="--glow-start: #00F0FF; --glow-end: #7000FF;" data-aos="fade-up" data-aos-delay="600">
+                    <div class="p-8 flex flex-col h-full">
+                         <div class="flex-grow"><div class="flex items-center justify-between mb-6"><h3 class="text-2xl font-bold font-display">Full AI Business Suite</h3><div class="bg-accent/20 text-accent px-3 py-1 rounded-full text-sm font-medium">Complete Solution</div></div><p class="text-white/70 mb-6">Combine WhatsApp automation and voice agents for a complete AI-powered business solution that handles all customer interactions.</p></div>
+                        <div class="flex justify-center items-center mt-auto"><div><a href="ai-suite.html" class="bg-gradient-to-r from-accent to-accent2 text-primary font-semibold px-6 py-2 rounded-full hover:opacity-90 transition-opacity">Learn More</a></div></div>
                     </div>
                 </div>
             </div>
@@ -449,19 +492,40 @@
             </div>
             <div class="max-w-3xl mx-auto space-y-6">
                 <!-- FAQ Item 1 -->
-                <div class="bg-secondary/80 backdrop-blur-sm rounded-xl p-6 border border-white/10" data-aos="fade-up" data-aos-delay="100">
-                    <h3 class="text-xl font-bold font-display mb-2">What is SyncFlo Ai?</h3>
-                    <p class="text-white/70">SyncFlo Ai is a business automation platform that uses intelligent AI chatbots for communication channels like WhatsApp, Instagram, and voice calls to handle tasks, reduce operational costs, and streamline workflows.</p>
+                <div class="faq-item bg-secondary/80 backdrop-blur-sm rounded-xl border border-white/10" data-aos="fade-up" data-aos-delay="100">
+                    <button class="faq-question w-full text-left p-6">
+                        <h3 class="text-xl font-bold font-display">What is SyncFlo Ai?</h3>
+                        <svg class="faq-arrow w-6 h-6 text-accent flex-shrink-0 ml-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-white/70 px-6 pb-6">SyncFlo Ai is a business automation platform that uses intelligent AI chatbots for communication channels like WhatsApp, Instagram, and voice calls to handle tasks, reduce operational costs, and streamline workflows.</p>
+                    </div>
                 </div>
                 <!-- FAQ Item 2 -->
-                <div class="bg-secondary/80 backdrop-blur-sm rounded-xl p-6 border border-white/10" data-aos="fade-up" data-aos-delay="200">
-                    <h3 class="text-xl font-bold font-display mb-2">How does the AI Voice Sales Agent work?</h3>
-                    <p class="text-white/70">Our AI Voice Sales Agent uses a human-like voice to handle inbound and outbound calls 24/7. It is trained to qualify leads, book appointments, and provide information, acting as a tireless member of your sales team.</p>
+                <div class="faq-item bg-secondary/80 backdrop-blur-sm rounded-xl border border-white/10" data-aos="fade-up" data-aos-delay="200">
+                    <button class="faq-question w-full text-left p-6">
+                        <h3 class="text-xl font-bold font-display">How does the AI Voice Sales Agent work?</h3>
+                        <svg class="faq-arrow w-6 h-6 text-accent flex-shrink-0 ml-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-white/70 px-6 pb-6">Our AI Voice Sales Agent uses a human-like voice to handle inbound and outbound calls 24/7. It is trained to qualify leads, book appointments, and provide information, acting as a tireless member of your sales team.</p>
+                    </div>
                 </div>
                 <!-- FAQ Item 3 -->
-                <div class="bg-secondary/80 backdrop-blur-sm rounded-xl p-6 border border-white/10" data-aos="fade-up" data-aos-delay="300">
-                    <h3 class="text-xl font-bold font-display mb-2">Can SyncFlo Ai integrate with my existing tools?</h3>
-                    <p class="text-white/70">Yes, our platform is designed for seamless integration. You can connect it with your CRM, social media accounts, and other business tools to create a unified and automated ecosystem.</p>
+                <div class="faq-item bg-secondary/80 backdrop-blur-sm rounded-xl border border-white/10" data-aos="fade-up" data-aos-delay="300">
+                    <button class="faq-question w-full text-left p-6">
+                        <h3 class="text-xl font-bold font-display">Can SyncFlo Ai integrate with my existing tools?</h3>
+                        <svg class="faq-arrow w-6 h-6 text-accent flex-shrink-0 ml-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-white/70 px-6 pb-6">Yes, our platform is designed for seamless integration. You can connect it with your CRM, social media accounts, and other business tools to create a unified and automated ecosystem.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -531,19 +595,16 @@
         <div id="chat-messages" class="flex-1 p-4 overflow-y-auto flex flex-col">
             <!-- Messages will be appended here -->
              <div class="chat-message ai-message">
-                Hello! I'm your sales assistant. I can answer questions about SyncFlo Ai and our products. Try asking me to create a quick pitch for you!
-            </div>
+               Hello! I'm your sales assistant. I can answer questions about SyncFlo Ai and our products. How can I help you today?
+           </div>
         </div>
         <div class="p-4 bg-secondary border-t border-white/10">
             <div class="flex items-center">
-                <input type="text" id="chat-input" placeholder="Ask a question or type 'create pitch'..." class="flex-1 bg-primary border border-white/10 rounded-full py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-accent">
+                <input type="text" id="chat-input" placeholder="Ask a question about SyncFlo Ai..." class="flex-1 bg-primary border border-white/10 rounded-full py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-accent">
                 <button id="chat-send" class="ml-3 p-2 bg-gradient-to-r from-accent to-accent2 rounded-full">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 </button>
             </div>
-             <button id="generate-pitch" class="w-full mt-3 bg-white/10 border border-white/20 text-white font-semibold px-8 py-2 rounded-full text-center hover:bg-white/20 transition-colors">
-                ✨ Generate a Quick Pitch
-            </button>
         </div>
     </div>
 
@@ -604,7 +665,6 @@
         const chatMessages = document.getElementById('chat-messages');
         const chatInput = document.getElementById('chat-input');
         const chatSend = document.getElementById('chat-send');
-        const generatePitchButton = document.getElementById('generate-pitch');
         
         // IMPORTANT: Add your own Gemini API Key here
         const apiKey = "AIzaSyDftfcS4AQNPYo3Q2joZmYikWB4vpO_SfI"; 
@@ -670,7 +730,7 @@
         // 3. Define the initial prompt for the AI
         let chatHistory = [{
             role: "user",
-            parts: [{ text: "You are a fun, friendly and helpful Sales assistant for SyncFlo Ai. You are talking on behalf of SyncFlo and your goal is to answer questions about the company and its products (WhatsApp Automation, AI Voice Sales Agent). Your primary goal is to understand the user's needs and explain how SyncFlo's products can solve their problems. Only suggest a demo when it's a natural next step. If a user wants to book a demo, you MUST first ask them if they want a mock demo or a live demo by calling the `displayButtons` tool with the options 'Show me a mock demo' and 'Book a live demo'. If they choose live demo, you MUST use the `redirectToCalendly` tool after getting their name and email. If they choose mock demo, tell the user they can see it on our website and by calling the 'displayButtons' tool with options 'Go to Demo Page' and 'Go to Industry Page' and when the user clicks the 'Go to Demo Page' button, immediately use the 'openlink' tool and open 'https://syncflo.xyz/demo'. And If the user chooses 'Go to Industry Page', immediatley use the 'openlink' tool and open 'https://syncflo.xyz/whatsapp-industry'. If a user asks about pricing, tell them it starts at $99/month and then immediately use the `openLink` tool to show them the full details at 'https://syncflo.xyz/pricing.html'. Keep messages short. Do not make up information. Also the founder of SyncFlo AI is Apurva" }]
+            parts: [{ text: "You are a fun, friendly and helpful Sales assistant for SyncFlo Ai. You are talking on behalf of SyncFlo and your goal is to answer questions about the company and its products (WhatsApp Automation, AI Voice Sales Agent, Full AI Business Suite). Your primary goal is to understand the user's needs and explain how SyncFlo's products can solve their problems. Only suggest a demo when it's a natural next step. If a user wants to book a demo, you MUST first ask them if they want a mock demo or a live demo by calling the `displayButtons` tool with the options 'Show me a mock demo' and 'Book a live demo'. If they choose live demo, you MUST use the `redirectToCalendly` tool after getting their name and email. If they choose mock demo, tell the user they can see it on our website and by calling the 'displayButtons' tool with options 'Go to Demo Page' and 'Go to Industry Page' and when the user clicks the 'Go to Demo Page' button, immediately use the 'openlink' tool and open 'https://syncflo.xyz/demo'. And If the user chooses 'Go to Industry Page', immediatley use the 'openlink' tool and open 'https://syncflo.xyz/whatsapp-industry'. If a user asks about pricing, tell them it starts at $99/month and then immediately use the `openLink` tool to show them the full details at 'https://syncflo.xyz/pricing.html'. Keep messages short. Do not make up information. Also the founder of SyncFlo AI is Apurva" }]
         }, {
             role: "model",
             parts: [{ text: "Okay, I understand. My main goal is to be a helpful sales assistant, understand customer needs, and explain how our products can help. I will use my tools to provide demos and pricing information when appropriate. How can I help you today?" }]
@@ -814,47 +874,6 @@
             }
         }
 
-        async function generateQuickPitch() {
-            showTypingIndicator();
-            const prompt = `Based on the conversation history and SyncFlo Ai's products (WhatsApp Automation and AI Voice Sales Agent), write a short, compelling sales pitch for a business. The pitch should be no more than 3 sentences. Do not use any placeholders like [Client Name] or [Your Company].`;
-            
-            // Clear history and add new prompt to get a fresh pitch
-            const pitchHistory = [{
-                role: "user",
-                parts: [{ text: prompt }]
-            }];
-
-            try {
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-                
-                const payload = { 
-                    contents: pitchHistory
-                };
-
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!response.ok) {
-                    const errorBody = await response.text();
-                    console.error("API Error Body:", errorBody);
-                    throw new Error(`API request failed with status ${response.status}`);
-                }
-                
-                const result = await response.json();
-                removeTypingIndicator();
-                
-                const generatedPitch = result.candidates[0].content.parts[0].text;
-                addMessage(`✨ Here is a quick pitch for you: "${generatedPitch}"`, 'ai');
-
-            } catch (error) {
-                console.error("Error generating pitch:", error);
-                removeTypingIndicator();
-                addMessage("Sorry, I couldn't generate a pitch right now. Please try again.", 'ai');
-            }
-        }
 
         async function sendMessage(messageOverride = null) {
             const messageText = messageOverride || chatInput.value.trim();
@@ -875,7 +894,24 @@
             if (e.key === 'Enter') sendMessage();
         });
 
-        generatePitchButton.addEventListener('click', () => generateQuickPitch());
+
+        // FAQ Accordion Functionality
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isOpen = item.classList.contains('open');
+
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    otherItem.classList.remove('open');
+                });
+
+                // Open clicked item if it wasn't already open
+                if (!isOpen) {
+                    item.classList.add('open');
+                }
+            });
+        });
 
 
     </script>
